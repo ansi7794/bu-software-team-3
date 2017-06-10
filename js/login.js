@@ -8,7 +8,7 @@ $("#login_form").submit(function( event ) {
     var $form = $( this );
 
     // We want to customize what we post, therefore we format our data
-    var data = "login="+ $('#login').val() +"&password=" + $('#password').val();
+    var data = "txn=1"+"&user_name="+ $('#login').val() +"&user_password=" + $('#password').val();
 
     // For debugging purposes... see your console:
     // Prints out for example: login=myLoginName&passwordHash=a011a78a0c8d9e4f0038a5032d7668ab
