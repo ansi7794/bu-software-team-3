@@ -1,7 +1,7 @@
 // Attach a submit handler to the form
 $("#login_form").submit(function( event ) {
 	var data;
-    data = "txn=1"+"&user_name="+ $('#email_address').val() +"&user_password=" + $('#password').val();
+    data = "txn=2"+"&first_name"+ $('#first_name').val()+"&last_name"+ $('#last_name').val()+"&user_name="+ $('#email_address').val() +"&user_password=" + $('#password_1').val();
     // Stop form from submitting normally
     event.preventDefault();
 
