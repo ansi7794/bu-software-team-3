@@ -1,7 +1,7 @@
 // Attach a submit handler to the form
 $("#login_form").submit(function( event ) {
     var data;
-    var myJSON = {"user_name" : $('#username').val(), "user_password" :  $('#password').val()}
+    var myJSON = {"txn":"1","user_name" : $('#username').val(), "user_password" :  $('#password').val()}
 
     data = "txn=1"+"&user_name="+ $('#username').val() +"&user_password=" + $('#password').val();
 
