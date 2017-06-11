@@ -8,12 +8,12 @@ $("#login_form").submit(function( event ) {
     var $form = $( this );
 
     // We want to customize what we post, therefore we format our data
-    var data = "login="+ $('#login').val() +"&password=" + $('#password').val();
+    var data = "login="+ $('#username').val() +" & password=" + $('#password').val();
 
     // For debugging purposes... see your console:
     // Prints out for example: login=myLoginName&passwordHash=a011a78a0c8d9e4f0038a5032d7668ab
     console.log(data);
-
+    alert(data);
     // The actual from POST method
     $.ajax({
         type: $form.attr('method'),
