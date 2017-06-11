@@ -19,9 +19,9 @@ $("#login_form").submit(function( event ) {
     // The actual from POST method
     $.ajax({
         type: $form.attr('method'),
-        url:  "http://ec2-34-201-82-113.compute-1.amazonaws.com:8080/idea/idea.jsp?",//$form.attr('action'),
-        dataType: "jsonp",
-        data: myJSON,
+        url:  "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?txn=1&user_name=mturolski&user_password=3333",//$form.attr('action'),
+        //dataType: "jsonp",
+        //data: myJSON,
         success: function (data) {
             console.log("Hey, we got reply form java side, with following data: ");
             console.log(data);
