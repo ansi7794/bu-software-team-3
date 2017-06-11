@@ -26,7 +26,25 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+<script>
+function registerFunction(){
+    var myLink = document.getElementById('login_form').submit();
 
+    myLink.onclick = function(){
+
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = "js/login.js"; 
+        document.getElementsByTagName("head")[0].appendChild(script);
+        return false;
+
+    }
+}
+
+function testFunction(){
+    alert("testing");
+}
+</script>
 </head>
 
 <body>
@@ -45,6 +63,8 @@
             <a class="navbar-brand" href="#">Project Management Tool</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
+        <form role="form" action="." method="post" id="register_form">
+
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -184,8 +204,8 @@
             <hr class="colorgraph">
             <!-- register/login button -->
             <div class="row">
-                <div class="col-xs-12 col-md-6"><input type="submit" value="register" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
-                <div class="col-xs-12 col-md-6"><input type="submit" value="login" class="btn btn-success btn-block btn-lg" tabindex="8"></div>
+                <div class="col-xs-12 col-md-6"><input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7" onclick = "registerFunction()"></div>
+                <div class="col-xs-12 col-md-6"><input type="submit" value="Login" class="btn btn-success btn-block btn-lg" tabindex="8" onclick = "loginFunction()"></div>
             </div>
             <!-- /. register/login button -->
         </div>

@@ -26,6 +26,25 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<script>
+function loginFunction(){
+    var myLink = document.getElementById('login_form').submit();
+
+    myLink.onclick = function(){
+
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = "js/login.js"; 
+        document.getElementsByTagName("head")[0].appendChild(script);
+        return false;
+
+    }
+}
+
+function testFunction(){
+    alert("testing");
+}
+</script>
 </head>
 
 <body>
@@ -140,12 +159,12 @@
                 <hr class="colorgraph">
                 <div class="row">
                     <!-- login button -->
-                    <div class="col-xs-12 col-md-4">
-                        <input type="submit" id ='login' value="Login" class="btn btn-primary btn-block btn-lg" tabindex="7">
-                    </div>
+                        <!--input type="button" id ='login' value="Login" class="btn btn-primary btn-block btn-lg" tabindex="7" onclick="loginFunction()"-->
+                        <div class="col-xs-12 col-md-6"><input type="submit" id ='login' value="Login" class="btn btn-primary btn-block btn-lg" tabindex="7">
                     <!-- /.login button-->
-                    <div class="col-xs-12 col-md-4">
-                        <input type="submit" value="Register" class="btn btn-success btn-block btn-lg" tabindex="7">
+                    </div>
+                        <div class="col-xs-12 col-md-6"><input type="button" value="Register" class="btn btn-success btn-block btn-lg" tabindex="7" onclick = "testFunction()">
+                            
                     </div>
                 </div>
             </div>
@@ -197,8 +216,7 @@
 
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
-    <script src="js/login.js"></script>
-
+<script src="js/login.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 
