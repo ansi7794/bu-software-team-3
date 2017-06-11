@@ -7,6 +7,7 @@ $("#login_form").submit(function( event ) {
     // Get some values from elements on the page:
     var $form = $( this );
 
+    //changed from login to username
     // We want to customize what we post, therefore we format our data
     var data = "login="+ $('#username').val() +" & password=" + $('#password').val();
 
