@@ -98,7 +98,7 @@ $(function() {
   	}
 
   	$('.create-column').on('click', function(){
-  		var name = prompt("Wpisz nazwę kolumny");
+  		var name = prompt("Enter a column name");
   		var column = new Column(name);
   		board.addColumn(column);
   	});
@@ -116,10 +116,18 @@ $(function() {
 	var card2 = new Card('Make iFrames');
 	var card3 = new Card('Kanban Task Board');
 	var card4 = new Card("Finished templates");
+	var card5 = new Card('Drop down to switch kanban boards');
+	var card6 = new Card('Function to input Cloud key to import and export Kanban boards');
+	var card7 = new Card('Script to spin up EC2 Instances');
+	var card8 = new Card('Click on tasks to get more info');
 	
 	todoColumn.addCard(card1);
+	todoColumn.addCard(card5);
+	todoColumn.addCard(card6);
+	todoColumn.addCard(card7);
 	doingColumn.addCard(card2);
 	doingColumn.addCard(card3);
+	doingColumn.addCard(card8);
 	doneColumn.addCard(card4);
 
 });
