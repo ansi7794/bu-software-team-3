@@ -16,7 +16,7 @@ $("#login_form").submit(function( event ) {
     // Prints out for example: login=myLoginName&passwordHash=a011a78a0c8d9e4f0038a5032d7668ab
     console.log(myJSON);
     console.log(data);
-    // The actual from POST method
+    // The actual from GET method
     $.ajax({
         type: $form.attr('method'),
         url:  $form.attr('action'),
