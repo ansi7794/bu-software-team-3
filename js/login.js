@@ -17,12 +17,12 @@ $("#login_form").submit(function( event ) {
     // Prints out for example: login=myLoginName&passwordHash=a011a78a0c8d9e4f0038a5032d7668ab
     console.log(myJSON);
     console.log(data);
-    // The actual from POST method
+    // The actual from GET method
     $.ajax({
         type: $form.attr('method'),
-        url:  "http://ec2-34-201-82-113.compute-1.amazonaws.com:8080/idea/idea.jsp?",//$form.attr('action'),
-        dataType: "jsonp",
-        data: myJSON,
+        url:  $form.attr('action'),
+        //dataType: "jsonp",
+        //data: myJSON,
         success: function (data) {
             console.log("Hey, we got reply form java side, with following data: ");
             console.log(data);
