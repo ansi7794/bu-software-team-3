@@ -1,9 +1,9 @@
 // Attach a submit handler to the form
 $("#login_form").submit(function( event ) {
     var data;
-    var myJSON = {"txn":"1","user_name" : $('#username').val(), "user_password" :  $('#password').val()}
+    var myJSON = {"txn":"1","user_name" : $('#user_name').val(), "user_password" :  $('#password').val()}
 
-    data = "txn=1"+"&user_name="+ $('#username').val() +"&user_password=" + $('#password').val();
+    data = "txn=1"+"&user_name="+ $('#user_name').val() +"&user_password=" + $('#password').val();
 
     // Stop form from submitting normally
     event.preventDefault();
@@ -26,6 +26,7 @@ $("#login_form").submit(function( event ) {
         success: function (data) {
             console.log("Hey, we got reply form java side, with following data: ");
             console.log(data);
+            console.log("testing");
             // redirecting example..
             if(data === "SUCCESS") {
               window.location.replace("action");
@@ -35,7 +36,7 @@ $("#login_form").submit(function( event ) {
         error: function (data) {
                 console.log('An error occurred.');
                 console.log(data);
+                console.log("testing");
             },
-	    }
+	    });
     });
-});
