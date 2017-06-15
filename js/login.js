@@ -1,10 +1,7 @@
 // Attach a submit handler to the form
 $("#login_form").submit(function( event ) {
-    var data;
-    var myJSON = {"txn":"1","user_name" : $('#user_name').val(), "user_password" :  $('#password').val()}
-
-    data = "txn=1"+"&user_name="+ $('#user_name').val() +"&user_password=" + $('#password').val();
-
+    var data = "txn=1"+"&user_name="+ $('#user_name').val() +"&user_password=" + $('#user_password').val();
+    var tocheck = "\"user_name\":\"" + $('#user_name').val() + "\""
     // Stop form from submitting normally
     event.preventDefault();
 
@@ -15,28 +12,31 @@ $("#login_form").submit(function( event ) {
     
     // For debugging purposes... see your console:
     // Prints out for example: login=myLoginName&passwordHash=a011a78a0c8d9e4f0038a5032d7668ab
-    console.log(myJSON);
     console.log(data);
-    // The actual from GET method
+    console.log(tocheck)
+
+    // The actual form GET method
     $.ajax({
         type: $form.attr('method'),
         url:  $form.attr('action'),
-        //dataType: "jsonp",
-        //data: myJSON,
-        success: function (data) {
+        data: data,
+        success: function (info) {
             console.log("Hey, we got reply form java side, with following data: ");
-            console.log(data);
-            console.log("testing");
+            console.log(info);
+            myJSON = JSON.parse(info);
+            console.log(myJSON);
+            console.log("testing success");
             // redirecting example..
-            if(data === "SUCCESS") {
-              window.location.replace("action");
+            if(info.indexOf(tocheck)>-1) {
+                window.location.replace("projectSample.html");
+            }
+            else {
+                alert("Invalid Username or Password");
             }
         },
 
         error: function (data) {
                 console.log('An error occurred.');
-                console.log(data);
-                console.log("testing");
-            },
-	    });
-    });
+                console.log(data);            },
+	});
+});
