@@ -1,7 +1,8 @@
 # bu-software-team-3
 BU Summer Term CS 473/673 
 
-Notes: Right now the html file goes to login.js when the form submits. Can make register redirect to html and login page submit the form. If I do that, the loginFunction() can be deleted. OR I can make an onclick function but a lot of parameters will be passed in.
-
-
-Right now it's configured like the first one. There is no onclick, only a submit, on the login button in login.html. 
+Status of UI:
+* login.html page created and it goes to register.html when register button is clicked else goes to login.js when login form is submitted.
+* login.js sends information entered in login form and gets respone from JSP and then goes to projectSample.html page if user is valid, else it gives an alert for invalid user.
+* login.js also sends user information to projectSample.html page as an argument while redirecting.
+* projectSample.html recieves user info as argument in URL and converts it to JSON object and displays on console.
