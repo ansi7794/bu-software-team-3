@@ -23,18 +23,20 @@ $("#login_form").submit(function( event ) {
             console.log("Hey, we got reply form java side, with following data: ");
             console.log(info);
             myJSON = JSON.parse(info);
+            strJSON = JSON.stringify(myJSON);
             console.log("testing success");
             // redirecting example..
             if(myJSON.user_name == user) {
-                window.location.replace("projectSample.html");
+                window.location = "projectSample.html?"+strJSON;
             }
             else {
                 alert("Invalid Username or Password");
             }
         },
 
-        error: function (data) {
-                console.log('An error occurred.');
-                console.log(data);            },
+        error: function (info) {
+            console.log('An error occurred.');
+            console.log(info);
+        },
 	});
 });
