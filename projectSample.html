@@ -58,7 +58,7 @@
                     <a href="#">Contact</a>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Info <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#">1 Column Portfolio</a>
@@ -282,6 +282,17 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/dashboard.js"></script>
+<script type="text/javascript">
+    $(document).ready(function GetUrlValue(VarSearch){
+       var SearchString = String(document.URL);
+       var arr = SearchString.split('?');
+       var res = String(arr[1]).replace(/%22/g, "\"");
+       console.log(res);
+       //Set session variables
+       userJSON = JSON.parse(res);
+       console.log(userJSON);
+    });
+</script>
 </body>
 
 </html>
