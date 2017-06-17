@@ -21,6 +21,9 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -59,23 +62,9 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Info <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#">1 Column Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="#">2 Column Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="#">3 Column Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="#">4 Column Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="#">Single Portfolio Item</a>
-                        </li>
-                    </ul>
+                    <ul class="dropdown-menu" id="userdata">
+                        
+                    </ul>   
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
@@ -175,6 +164,7 @@
                         </div>
                     </header>
                 </div>
+
                 <div class="user-dashboard">
                     <h1>Project 1</h1>
                     <div class="table-responsive">
@@ -286,11 +276,14 @@
     $(document).ready(function GetUrlValue(VarSearch){
        var SearchString = String(document.URL);
        var arr = SearchString.split('?');
+       console.log(arr[1]);
        var res = String(arr[1]).replace(/%22/g, "\"");
        console.log(res);
        //Set session variables
-       userJSON = JSON.parse(res);
+       var userJSON = JSON.parse(res);
        console.log(userJSON);
+       var userinfo = "<li>"+userJSON.user_name+"</li><li>"+userJSON.user_fname+"</li><li>" + userJSON.user_lname+"</li><li>"+userJSON.user_email+"</li>";
+       $(userinfo).appendTo("#userdata");
     });
 </script>
 </body>
