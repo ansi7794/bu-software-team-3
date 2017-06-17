@@ -281,9 +281,28 @@
        console.log(res);
        //Set session variables
        var userJSON = JSON.parse(res);
+       var data = "txn=3"+"&user_name="+ userJSON.user_name;
        console.log(userJSON);
        var userinfo = "<li>"+userJSON.user_name+"</li><li>"+userJSON.user_fname+"</li><li>" + userJSON.user_lname+"</li><li>"+userJSON.user_email+"</li>";
+       var projectlist;
        $(userinfo).appendTo("#userdata");
+        $.ajax({
+            type: "GET",
+            url:  "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
+            data: data,
+            success: function (info) {
+                projectlist = info.replace(/(\r\n|\n|\r)/gm,"");
+                console.log("testing success");
+                console.log(projectlist);
+            },
+
+            error: function (info) {
+                console.log('An error occurred.');
+                console.log(info);
+            },
+        });
+        
+
     });
 </script>
 </body>
