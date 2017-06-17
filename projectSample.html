@@ -122,14 +122,7 @@
                     </a>
                 </div>
                 <div class="navi">
-                    <ul>
-                        <li class="active"><a href="#"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Project 1</span></a></li>
-                        <li><a href="#"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Project 2</span></a></li>
-                        <li><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Project 3</span></a></li>
-                        <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Project 4</span></a></li>
-                        <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Project 5</span></a></li>
-                        <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Project 6</span></a></li>
-                    </ul>
+                    <ul id="prodata"></ul>
                 </div>
             </div>
             <div class="col-md-10 col-sm-11 display-table-cell v-align">
@@ -164,64 +157,7 @@
                         </div>
                     </header>
                 </div>
-
-                <div class="user-dashboard">
-                    <h1>Project 1</h1>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <tbody>
-                            <tr>
-                                <td>Project Title</td>
-                                <td>Header</td>
-                            </tr>
-                            <tr>
-                                <td>Assignee</td>
-                                <td>Jim</td>
-                            </tr>
-                            <tr>
-                                <td>Due Day</td>
-                                <td>Integer</td>
-                            </tr>
-                            <tr>
-                                <td>Description</td>
-                                <td>sakjfl;ksflksjalkvnlkavn</td>
-                            </tr>
-                            <tr>
-                                <td>More</td>
-                                <td>More...</td>
-                            </tr>
-                            <tr>
-                                <td>More</td>
-                                <td>More...</td>
-                            </tr>
-                            <tr>
-                                <td>More</td>
-                                <td>More...</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- go tasks button -->
-                <header>
-                    <div class="col-md-7">
-                        <nav class="navbar-default pull-left">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas" data-target="#side-menu" aria-expanded="false">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                            </div>
-                        </nav>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="header-rightside">
-                            <input type="button" class="btn btn-primary pull-right"  value="go tasks" name="gotasks" id="gotasks" formmethod="post">
-                        </div>
-                    </div>
-                </header>
+                <iframe src="project.html" style="width: 100%; height: 500px; border: 0px"></iframe>
                 <!-- /. go tasks -->
             </div>
         </div>
@@ -285,6 +221,7 @@
        console.log(userJSON);
        var userinfo = "<li>"+userJSON.user_name+"</li><li>"+userJSON.user_fname+"</li><li>" + userJSON.user_lname+"</li><li>"+userJSON.user_email+"</li>";
        var projectlist;
+       var listlen;
        $(userinfo).appendTo("#userdata");
         $.ajax({
             type: "GET",
@@ -294,7 +231,16 @@
                 projects = info.replace(/\n/gm," ").split(" ");
                 projectlist = projects.filter(function(v){return v.startsWith("{")});
                 console.log("testing success");
+                listlen = projectlist.length;
+                console.log(listlen);
                 console.log(projectlist);
+                for (var i = 0; i < listlen; i++) {
+                    console.log(i);
+                    proJSON = JSON.parse(projectlist[i]);
+                    var proinfo = "<li><a href="+proJSON.project_id+"><i class=\"fa fa-home\" aria-hidden=\"true\"></i><span class=\"hidden-xs hidden-sm\">"+proJSON.project_name+"</span></a></li>";
+                    console.log(proinfo);
+                    $(proinfo).appendTo("#prodata");
+                }
             },
 
             error: function (info) {
