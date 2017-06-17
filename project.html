@@ -32,72 +32,44 @@
 
 <body>
 
-<div class="user-dashboard">
-    <h1>Project 1</h1>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <tbody>
-            <tr>
-                <td>Project Title</td>
-                <td>Header</td>
-            </tr>
-            <tr>
-                <td>Assignee</td>
-                <td>Jim</td>
-            </tr>
-            <tr>
-                <td>Due Day</td>
-                <td>Integer</td>
-            </tr>
-            <tr>
-                <td>Description</td>
-                <td>sakjfl;ksflksjalkvnlkavn</td>
-            </tr>
-            <tr>
-                <td>More</td>
-                <td>More...</td>
-            </tr>
-            <tr>
-                <td>More</td>
-                <td>More...</td>
-            </tr>
-            <tr>
-                <td>More</td>
-                <td>More...</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+<div class="user-dashboard" id="prodata"></div>
 <!-- go tasks button -->
-<header>
-    <div class="col-md-7">
-        <nav class="navbar-default pull-left">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas" data-target="#side-menu" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-        </nav>
-    </div>
-    <div class="col-md-5">
-        <div class="header-rightside">
-            <input type="button" class="btn btn-primary pull-right"  value="go tasks" name="gotasks" id="gotasks" formmethod="post">
-        </div>
-    </div>
-</header>
-
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/dashboard.js"></script>
+<script type="text/javascript">
+    $(document).ready(function GetUrlValue(VarSearch){
+       var SearchString = String(document.URL);
+       var arr = SearchString.split('?');
+       console.log(arr[1]);
+       var data = "txn=4"+"&project_id="+ arr[1];
+        $.ajax({
+            type: "GET",
+            url:  "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
+            data: data,
+            success: function (info) {
+                console.log("yeah");
+                console.log(info);
+                var projects = info.replace(/\n/gm,"");
+                var detailsJSON = JSON.parse(projects);
+                console.log(detailsJSON);
+                var projectinfo = "<h1>"+detailsJSON.project_name+"</h1><div class=\"table-responsive\"><table class=\"table table-striped\"><tbody><tr><td>Project ID</td><td>"+detailsJSON.project_id+"</td></tr><tr><td>Project Creator</td><td>"+detailsJSON.project_creator+"</td></tr><tr><td>Project Status</td><td>"+detailsJSON.project_status+"</td></tr><tr><td>Project description</td><td>"+detailsJSON.project_description+"</td></tr></tbody></table></div><header><div class=\"col-md-5\"><div class=\"header-rightside\"><input type=\"button\" class=\"btn btn-primary pull-right\"  value=\"go tasks\" name=\"gotasks\" id=\"gotasks\" formmethod=\"post\"></div></div></header>";
+                $(projectinfo).appendTo("#prodata");
+                //"project_description":"Project management application for software engineering class","project_creator":"Jim","project_id":"id1234","project_status":"on track ","project_name":"id1234"
+            },
+
+            error: function (info) {
+                console.log('An error occurred.');
+                console.log(info);
+            },
+        });
+    });
+</script>
 </body>
 
 </html>
