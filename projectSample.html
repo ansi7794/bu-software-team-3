@@ -291,7 +291,8 @@
             url:  "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
             data: data,
             success: function (info) {
-                projectlist = info.replace(/(\r\n|\n|\r)/gm,"");
+                projects = info.replace(/\n/gm," ").split(" ");
+                projectlist = projects.filter(function(v){return v.startsWith("{")});
                 console.log("testing success");
                 console.log(projectlist);
             },
@@ -301,7 +302,6 @@
                 console.log(info);
             },
         });
-        
 
     });
 </script>
