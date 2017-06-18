@@ -227,7 +227,15 @@
        var userJSON = JSON.parse(res);
        var data = "txn=3"+"&user_name="+ userJSON.user_name;
        console.log(userJSON);
-       var userinfo = "<li>"+userJSON.user_name+"</li><li>"+userJSON.user_fname+"</li><li>" + userJSON.user_lname+"</li><li>"+userJSON.user_email+"</li>";
+       var userinfo = "<table class=\"table table-condensed table-responsive table-user-information\"><tbody class=\"col-md-12\"><tr><td class=\"col-md-3\"><b>User Name:</b></td><td class=\"col-md-9\">"
+           + userJSON.user_name
+           + "</td></tr><tr><td class=\"col-md-3\"><b>Real Name:</b></td><td class=\"col-md-9\">"
+           + userJSON.user_fname
+           + "&nbsp;"
+           + userJSON.user_lname
+           + "</td></tr><tr><td class=\"col-md-3\"><b>Email:</b></td><td class=\"col-md-9\">"
+           + userJSON.user_email
+           + "</td></tr></tbody></table>";
        var projectlist;
        var listlen;
        $(userinfo).appendTo("#userdata");
