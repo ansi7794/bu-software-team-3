@@ -1,20 +1,19 @@
 // Attach a submit handler to the form
 $("#register_form").submit(function( event ) {
     if ($('#user_password1').val() == $('#user_password2').val()) { 
-        var data = "txn=1"+"&user_name="+ $('#user_name').val() +"&user_password=" + $('#user_password1').val();
-        var tocheck = "{\"user_name\":\"" + $('#user_name').val() + "\"}"
+        var data = "txn=2"+"&user_name="+ $('#user_name').val() +"&user_password=" + $('#user_password1').val()+"&user_email=" + $('#user_email').val()+"&user_fname=" + $('#user_fname').val()+"&user_lname=" + $('#user_lname').val();
+        var user = $('#user_name').val();
         // Stop form from submitting normally
         event.preventDefault();
 
         // Get some values from elements on the page:
         var $form = $( this );  
-
         // We want to customize what we post, therefore we format our data
         
         // For debugging purposes... see your console:
         // Prints out for example: login=myLoginName&passwordHash=a011a78a0c8d9e4f0038a5032d7668ab
         console.log(data);
-        console.log(tocheck)
+        console.log(user);
 
         // The actual form GET method
         $.ajax({
@@ -24,19 +23,22 @@ $("#register_form").submit(function( event ) {
             success: function (info) {
                 console.log("Hey, we got reply form java side, with following data: ");
                 console.log(info);
+                myJSON = JSON.parse(info);
+                strJSON = JSON.stringify(myJSON);
                 console.log("testing success");
                 // redirecting example..
-                if(info.indexOf(tocheck)>-1) {
-                    window.location.replace("projectSample.html");
+                if(myJSON.user_name == user) {
+                    window.location = "projectSample.html?"+strJSON;
                 }
                 else {
-                    alert("Invalid Username or Password");
+                    alert("User Already Present");
                 }
             },
 
-            error: function (data) {
-                    console.log('An error occurred.');
-                    console.log(data);            },
+            error: function (info) {
+                console.log('An error occurred.');
+                console.log(info);
+            },
         });
     }
     else {
