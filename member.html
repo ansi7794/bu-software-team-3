@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CS675 term project</title>
+
+    <link href="css/dashboard.css" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/modern-business.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<div class="user-dashboard">
+    <h1> Members</h1>
+    <div class=\"table-responsive\">
+        <table class=\"table table-striped\">
+            <tbody id="memdata">
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- go tasks button -->
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="js/dashboard.js"></script>
+<script type="text/javascript">
+    $(document).ready(function GetUrlValue(VarSearch){
+       var SearchString = String(document.URL);
+       var arr = SearchString.split('?');
+       console.log(arr[1]);
+       var data = "txn=5"+"&project_id="+ arr[1];
+       var memlist;
+       var listlen;
+        $.ajax({
+            type: "GET",
+            url:  "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
+            data: data,
+            success: function (info) {
+                console.log("yeah");
+                console.log(info);
+                members = info.replace(/\n/gm," ").split(" ");
+                memlist = members.filter(function(v){return v.startsWith("{")});
+                listlen = memlist.length;
+                for (var i = 0; i < listlen; i++) {
+                    console.log(i);
+                    memJSON = JSON.parse(memlist[i]);
+                    var memberinfo = "<tr><td>Member "+i+" </td><td>"+memJSON.user_name+"</td></tr>";
+                    $(memberinfo).appendTo("#memdata");
+                }
+                //"project_description":"Project management application for software engineering class","project_creator":"Jim","project_id":"id1234","project_status":"on track ","project_name":"id1234"
+            },
+
+            error: function (info) {
+                console.log('An error occurred.');
+                console.log(info);
+            },
+        });
+    });
+</script>
+</body>
+
+</html>
