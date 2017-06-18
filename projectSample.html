@@ -139,7 +139,7 @@
                         <span class="hidden-xs hidden-sm">Project List</span>
                     </a>
                 </div>
-                <div class="navi">
+                <div class="navi" style="height: 500px">
                     <ul id="prodata"></ul>
                 </div>
             </div>
@@ -247,9 +247,11 @@
            + "</td></tr><tr><td class=\"col-md-3\"><b>Email:</b></td><td class=\"col-md-9\">"
            + userJSON.user_email
            + "</td></tr></tbody></table>";
-       var projectlist;
-       var listlen;
-       $(userinfo).appendTo("#userdata");
+
+        $(userinfo).appendTo("#userdata");
+        
+        var projectlist;
+        var listlen;
         $.ajax({
             type: "GET",
             url:  "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",

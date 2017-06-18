@@ -36,7 +36,7 @@
 <!-- go tasks button -->
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
-
+<script src="js/member.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 
@@ -58,7 +58,11 @@
                 var projects = info.replace(/\n/gm,"");
                 var detailsJSON = JSON.parse(projects);
                 console.log(detailsJSON);
-                var projectinfo = "<h1>"+detailsJSON.project_name+"</h1><div class=\"table-responsive\"><table class=\"table table-striped\"><tbody><tr><td>Project ID</td><td>"+detailsJSON.project_id+"</td></tr><tr><td>Project Creator</td><td>"+detailsJSON.project_creator+"</td></tr><tr><td>Project Status</td><td>"+detailsJSON.project_status+"</td></tr><tr><td>Project description</td><td>"+detailsJSON.project_description+"</td></tr></tbody></table><d1><dt>To Do</dt><dd>- Make chat room feature</dd><dd>- Task page</dd><dt>In Process</dt><dd>- Add project button</dd><dt>Completed</dt><dd>- Login and project retrieval</dd></d1></div><header><div class=\"col-md-5\"><div class=\"header-rightside\"><input type=\"button\" class=\"btn btn-primary pull-right\"  value=\"go tasks\" name=\"gotasks\" id=\"gotasks\" formmethod=\"post\"></div></div></header>";
+                var taskbutton = "<header><a href=\"tasks_kanban_pro.html\"><div class=\"col-md-5\"><div class=\"header-rightside\"><input type=\"button\" class=\"btn btn-primary pull-right\"  value=\"Go To Tasks\" name=\"gotasks\" id=\"gotasks\" formmethod=\"post\"></div></div></a></header>";
+                var issuebutton = "<header><a href=\"issues_pro.html\"><div class=\"col-md-5\"><div class=\"header-rightside\"><input type=\"button\" class=\"btn btn-primary pull-right\"  value=\"Go To Issues\" name=\"goissues\" id=\"goissues\" formmethod=\"post\"></div></div></a></header>";
+                var tasklist = "<div><h1>Tasks</h1><d1><dt>To Do</dt><dd>- Make chat room feature</dd><dd>- Task page</dd><dt>In Process</dt><dd>- Add project button</dd><dt>Completed</dt><dd>- Login and project retrieval</dd></d1></div>";
+                var issuelist = "<div><h1>Issues</h1><d1><dt>In Progress</dt><dd>- Make chat room feature</dd><dd>- Task page</dd><dt>Solved</dt><dd>- Add project button</dd></d1></div>";
+                var projectinfo = "<h1>"+detailsJSON.project_name+"</h1><div class=\"table-responsive\"><table class=\"table table-striped\"><tbody><tr><td>Project ID</td><td>"+detailsJSON.project_id+"</td></tr><tr><td>Project Creator</td><td>"+detailsJSON.project_creator+"</td></tr><tr><td>Project Status</td><td>"+detailsJSON.project_status+"</td></tr><tr><td>Project description</td><td>"+detailsJSON.project_description+"</td></tr></tbody></table></div></br></br>"+taskbutton+tasklist+"</br></br></br>"+issuebutton+issuelist;
                 $(projectinfo).appendTo("#prodata");
                 //"project_description":"Project management application for software engineering class","project_creator":"Jim","project_id":"id1234","project_status":"on track ","project_name":"id1234"
             },
