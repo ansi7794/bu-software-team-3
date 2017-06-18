@@ -30,6 +30,16 @@
             document.getElementById('prodetail').src = loc;
         }
     </script>
+    <script>
+        function new_project(){
+            console.log("hi");
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.src = "js/project.js"; 
+            document.getElementsByTagName("head")[0].appendChild(script);
+                return false;
+        }
+    </script>
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -184,14 +194,14 @@
                     <h4 class="modal-title">Add Project</h4>
                 </div>
                 <div class="modal-body">
-                    <input type="text" placeholder="Project Title" name="projecttitle">
-                    <input type="text" placeholder="Assignee" name="assignee">
-                    <input type="text" placeholder="Due Day" name="dueday">
-                    <textarea placeholder="Desicrption"></textarea>
+                    <input type="text" id = "project_name" placeholder="Project Name" name="project_name">
+                    <input type="text" id = "project_creator" placeholder="Project Creator" name="project_creator">
+                    <input type="text" id="project_status" placeholder="Project Status" name="project_status">
+                    <input type="text" id="project_description" placeholder="Project Description" name="project_description">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="cancel" data-dismiss="modal">Close</button>
-                    <button type="button" class="add-project" data-dismiss="modal">Save</button>
+                    <button type="button" id="add-project" onclick="new_project()" class="add-project" data-dismiss="modal">Save</button>
                 </div>
             </div>
 
@@ -212,6 +222,7 @@
 
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
+<script src="js/project.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
