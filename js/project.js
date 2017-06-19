@@ -1,9 +1,15 @@
 $("#add-project").click(function( event ) {
-  project_name = document.getElementById('project_name');
-  project_creator = document.getElementById('project_creator');
-  project_status = document.getElementById('project_status');
-  project_description = document.getElementById('project_description');
-  data = "txn=6&project_name="+project_name+"&project_creator="+project_creator+"&project_status="+project_status+"&project_description="+project_description;
+  var SearchString = String(document.URL);
+  var arr = SearchString.split('?');
+  console.log(arr[1]);
+  var res = String(arr[1]).replace(/%22/g, "\"");
+  userJSON=JSON.parse(res);
+  project_name = $('#project_name').val()
+  project_creator = $('#project_creator').val();
+  project_status = $('#project_status').val();
+  project_description = $('#project_description').val();
+  data = "txn=6&user_name="+userJSON.user_name+"&project_name="+project_name+"&project_status="+project_status+"&project_creator="+project_creator+"&project_description="+project_description;
+  console.log(data);
   $.ajax({
     type: "POST",
     url:  "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
