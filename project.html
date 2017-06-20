@@ -11,7 +11,7 @@
 
     <title>CS675 term project</title>
 
-    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/project.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -28,12 +28,65 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- task list -->
+    <script>
+        $('.nav-tabs-dropdown').each(function(i, elm) {
+
+            $(elm).text($(elm).next('ul').find('li.active a').text());
+
+        });
+
+        $('.nav-tabs-dropdown').on('click', function(e) {
+
+            e.preventDefault();
+
+            $(e.target).toggleClass('open').next('ul').slideToggle();
+
+        });
+
+        $('#nav-tabs-wrapper a[data-toggle="tab"]').on('click', function(e) {
+
+            e.preventDefault();
+
+            $(e.target).closest('ul').hide().prev('a').removeClass('open').text($(this).text());
+
+        });
+    </script>
 </head>
 
 <body>
+<!-- container -->
 
+<div class="container">
 <div class="user-dashboard" id="prodata"></div>
 <!-- go tasks button -->
+
+<!-- Modal -->
+<div id="edit_project" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header login-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Edit Project</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" id = "proj_name" placeholder="Project Name" name="project_name" class="form-control input-md">
+                <input type="text" id = "proj_creator" placeholder="Project Creator" name="project_creator" class="form-control input-md">
+                <input type="text" id="proj_status" placeholder="Project Status" name="project_status" class="form-control input-md">
+                <input type="text" id="proj_description" placeholder="Project Description" name="project_description" class="form-control input-md">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 <!-- Bootstrap Core JavaScript -->
@@ -59,9 +112,24 @@
                 console.log(detailsJSON);
                 var taskbutton = "<header><a href=\"tasks_kanban_pro.html\"><div class=\"col-md-5\"><div class=\"header-rightside\"><input type=\"button\" class=\"btn btn-primary pull-right\"  value=\"Go To Tasks\" name=\"gotasks\" id=\"gotasks\" formmethod=\"post\"></div></div></a></header>";
                 var issuebutton = "<header><a href=\"issues_pro.html\"><div class=\"col-md-5\"><div class=\"header-rightside\"><input type=\"button\" class=\"btn btn-primary pull-right\"  value=\"Go To Issues\" name=\"goissues\" id=\"goissues\" formmethod=\"post\"></div></div></a></header>";
-                var tasklist = "<div><h1>Tasks</h1><d1><dt>To Do</dt><dd>- Make chat room feature</dd><dd>- Task page</dd><dt>In Process</dt><dd>- Add project button</dd><dt>Completed</dt><dd>- Login and project retrieval</dd></d1></div>";
-                var issuelist = "<div><h1>Issues</h1><d1><dt>In Progress</dt><dd>- Make chat room feature</dd><dd>- Task page</dd><dt>Solved</dt><dd>- Add project button</dd></d1></div>";
-                var projectinfo = "<h1>"+detailsJSON.project_name+"</h1><div class=\"table-responsive\"><table class=\"table table-striped\"><tbody><tr><td>Project ID</td><td>"+detailsJSON.project_id+"</td></tr><tr><td>Project Creator</td><td>"+detailsJSON.project_creator+"</td></tr><tr><td>Project Status</td><td>"+detailsJSON.project_status+"</td></tr><tr><td>Project description</td><td>"+detailsJSON.project_description+"</td></tr></tbody></table></div><iframe id=\"memdetail\" src=\"member.html?"+detailsJSON.project_id+"\" style=\"width: 100%; height:300px; border: 0px\"></iframe></br></br>"+taskbutton+tasklist+"</br></br></br>"+issuebutton+issuelist;
+//                var tasklist = "<div><h1>Tasks</h1><d1><dt>To Do</dt><dd>- Make chat room feature</dd><dd>- Task page</dd><dt>In Process</dt><dd>- Add project button</dd><dt>Completed</dt><dd>- Login and project retrieval</dd></d1></div>";
+                var tasklist = "<div class='row'><div class='col-sm-12'><h2>Tasks</h2><ul id='nav-tabs-wrapper' class='nav nav-tabs nav-tabs-horizontal'><li class='active'><a href='#todo' data-toggle='tab'>To Do</a> </li><li><a href='#inprocess' data-toggle='tab'>In Process</a> </li><li><a href='#completed' data-toggle='tab'>Completed</a></li></ul><div class='tab-content'><div role='tabpanel' class='tab-pane fade in active' id='todo'><h3>To Do</h3><i class='glyphicon glyphicon-tags'></i><p>Make a chatroon feature</p><i class='glyphicon glyphicon-tags'></i><p>Issue Tracker add feature</p></div><div role='tabpanel' class='tab-pane fade' id='inprocess'><h3>In Process</h3><i class='glyphicon glyphicon-arrow-right'></i><p>Make a chatroon feature</p><i class='glyphicon glyphicon-arrow-right'></i><p>Make a chatroon feature</p></div><div role='tabpanel' class='tab-pane fade' id='completed'><h3>Completed</h3><i class='glyphicon glyphicon-check'></i><p>Make a chatroon feature</p><i class='glyphicon glyphicon-check'></i><p>Make a chatroon feature</p></div></div></div></div><hr><br><br>";
+//                var issuelist = "<div><h1>Issues</h1><d1><dt>In Progress</dt><dd>- Make chat room feature</dd><dd>- Task page</dd><dt>Solved</dt><dd>- Add project button</dd></d1></div>";
+                var issuelist = "<div class='row'><div class='col-sm-12'><h2>Issues</h2><ul id='nav-tabs-wrapper' class='nav nav-tabs nav-tabs-horizontal'><li class='active'><a href='#new' data-toggle='tab'>New</a> </li><li><a href='#open' data-toggle='tab'>Open</a> </li><li><a href='#awaiting' data-toggle='tab'>Awaiting</a></li><li><a href='#processing' data-toggle='tab'>Processing</a></li><li><a href='#closed' data-toggle='tab'>Closed</a></li></ul><div class='tab-content'><div role='tabpanel' class='tab-pane fade in active' id='new'><h3>New</h3><i class='glyphicon glyphicon-star'></i><p>Make a chatroon feature</p><i class='glyphicon glyphicon-star'></i><p>Issue Tracker add feature</p></div><div role='tabpanel' class='tab-pane fade' id='open'><h3>Open</h3><i class='glyphicon glyphicon-share'></i><p>Make a chatroon feature</p><i class='glyphicon glyphicon-share'></i><p>Make a chatroon feature</p></div><div role='tabpanel' class='tab-pane fade' id='awaiting'><h3>Awaiting</h3><i class='glyphicon glyphicon-pause'></i><p>Make a chatroon feature</p><i class='glyphicon glyphicon-pause'></i><p>Make a chatroon feature</p></div><div role='tabpanel' class='tab-pane fade' id='processing'><h3>Processing</h3><i class='glyphicon glyphicon-play'></i><p>Make a chatroon feature</p><i class='glyphicon glyphicon-play'></i><p>Make a chatroon feature</p></div><div role='tabpanel' class='tab-pane fade' id='closed'><h3>Closed</h3><i class='glyphicon glyphicon-stop'></i><p>Make a chatroon feature</p><i class='glyphicon glyphicon-stop'></i><p>Make a chatroon feature</p></div></div></div></div><hr><br><br>";
+
+                var projectinfo = "<h1>"
+                    +detailsJSON.project_name
+                    +"</h1><div class=\"table-responsive\"><table class=\"table table-striped\"><tbody><tr><td>Project ID</td><td>"
+                    +detailsJSON.project_id+"</td></tr><tr><td>Project Creator</td><td>"
+                    +detailsJSON.project_creator
+                    +"</td></tr><tr><td>Project Status</td><td>"
+                    +detailsJSON.project_status
+                    +"</td></tr><tr><td>Project description</td><td>"
+                    +detailsJSON.project_description
+                    +"</td></tr></tbody></table><input type='button' class='btn btn-danger pull-right' value='Delt' name='editProj'><a href='#' class='edit-project' data-toggle='modal' data-target='#edit_project'><input type='button' class='btn btn-warning pull-right' value='Edit' name='editProj'></a></div><hr><iframe id=\"memdetail\" src=\"member.html?"
+                    +detailsJSON.project_id+"\" style=\"width: 100%; height:300px; border: 0px\"></iframe><hr></br></br>"
+                    +taskbutton+tasklist+"<hr></br></br></br>"
+                    +issuebutton+issuelist;
                 console.log(projectinfo);
                 $(projectinfo).appendTo("#prodata");
                 //"project_description":"Project management application for software engineering class","project_creator":"Jim","project_id":"id1234","project_status":"on track ","project_name":"id1234"
@@ -74,6 +142,7 @@
         });
     });
 </script>
+
 </body>
 
 </html>

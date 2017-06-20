@@ -34,11 +34,15 @@
 
 <div class="user-dashboard">
     <h1> Members</h1>
-    <div class=\"table-responsive\">
-        <table class=\"table table-striped\">
-            <tbody id="memdata">
-            </tbody>
-        </table>
+    <!--<div class="table-responsive">-->
+        <!--<table class="table table-striped">-->
+            <!--<tbody id="memdata">-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</div>-->
+    <div class="addon">
+        <ul id="memdata">
+        </ul>
     </div>
 </div>
 <!-- go tasks button -->
@@ -70,7 +74,10 @@
                 for (var i = 0; i < listlen; i++) {
                     console.log(i);
                     memJSON = JSON.parse(memlist[i]);
-                    var memberinfo = "<tr><td>Member "+i+" </td><td>"+memJSON.user_name+"</td></tr>";
+//                    var memberinfo = "<tr><td>Member "+i+" </td><td>"+memJSON.user_name+"</td></tr>";
+                    var memberinfo = "<li class='clearfix'><a href='#'><i class='glyphicon glyphicon-user'><span>"
+                                    + memJSON.user_name
+                                    + "</span></i></a><hr></li>";
                     $(memberinfo).appendTo("#memdata");
                 }
                 //"project_description":"Project management application for software engineering class","project_creator":"Jim","project_id":"id1234","project_status":"on track ","project_name":"id1234"
