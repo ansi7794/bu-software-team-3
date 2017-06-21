@@ -59,7 +59,7 @@
                 <div class="col-md-5">
                     <div class="header-rightside">
                         <ul class="list-inline header-top pull-right">
-                            <li class="hidden-xs"><a href="#" class="add-project" data-toggle="modal" data-target="#add_project">Add Project</a></li>
+                            <li class="hidden-xs"><a href="#" class="add_issue" data-toggle="modal" data-target="#add_issue">Add New Issue</a></li>
                             <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
                             <li>
                                 <a href="#" class="icon-info">
@@ -168,16 +168,16 @@
                 </table>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-2 pull-right">
-                <a href="#" class="btn-two yellow rounded">Edit</a>
+                <a href="#" class="btn-two yellow rounded" data-toggle="modal" data-target="#edit_issue">Edit</a>
                 <a href="#" class="btn-two red rounded">Delete</a>
             </div>
         </div>
-    </div>
 
     <!-- Edit/Delete Modal -->
-    <div id="edit_project" class="modal fade" role="dialog">
+    <div id="eidt_issue" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Edit/Delete Modal content-->
             <div class="modal-content">
@@ -200,7 +200,7 @@
     </div>
 
     <!-- Add Modal content -->
-    <div id="add_project" class="modal fade" role="dialog">
+    <div id="add_issue" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
@@ -219,9 +219,9 @@
                     <button type="button" id="add-project" onclick="new_project()" class="add-project" data-dismiss="modal">Save</button>
                 </div>
             </div>
-
         </div>
     </div>
+
 </div>
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
