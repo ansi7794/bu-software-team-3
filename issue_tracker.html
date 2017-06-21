@@ -10,12 +10,15 @@
     <meta name="author" content="">
 
     <title>CS675 term project</title>
-    <link href="css/dashboardTest.css" rel="stylesheet">
+
+    <link href="css/project.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/modern-business.css" rel="stylesheet">
+    <link href="css/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -27,279 +30,347 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- task list -->
+    <script>
+        $('.nav-tabs-dropdown').each(function(i, elm) {
+
+            $(elm).text($(elm).next('div').find('div.active a').text());
+
+        });
+
+        $('.nav-tabs-dropdown').on('click', function(e) {
+
+            e.preventDefault();
+
+            $(e.target).toggleClass('open').next('div.col-lg-3 col-md-6').slideToggle();
+
+        });
+
+        $('#nav-tabs-wrapper a[data-toggle="tab"]').on('click', function(e) {
+
+            e.preventDefault();
+
+            $(e.target).closest('ul').hide().prev('a').removeClass('open').text($(this).text());
+
+        });
+    </script>
+    <script>
+        function new_project(){
+            console.log("hi");
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.src = "js/project.js";
+            document.getElementsByTagName("head")[0].appendChild(script);
+            return false;
+        }
+    </script>
 </head>
 
 <body>
+<!-- container -->
 
-<!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Project Management Tool</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#">1 Column Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="#">2 Column Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="#">3 Column Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="#">4 Column Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="#">Single Portfolio Item</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#">Blog Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Blog Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Blog Post</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#">Full Width Page</a>
-                        </li>
-                        <li>
-                            <a href="#">Sidebar Page</a>
-                        </li>
-                        <li>
-                            <a href="#">FAQ</a>
-                        </li>
-                        <li>
-                            <a href="#">404</a>
-                        </li>
-                        <li>
-                            <a href="#">Pricing Table</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
-
-<!-- Page Content -->
-<div class="container">
-
-    <!-- Marketing Icons Section -->
+<div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">
-                Issue Tracker
-            </h1>
-        </div>
-        <div class="col-lg-12">
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <tbody>
-                <tr>
-                    <td>Status</td>
-                    <td>Title</td>
-                    <td>Assignee</td>
-                    <td>Reporter</td>
-                    <td>Priority</td>
-                    <td>Created Time</td>
-                    <td>Last Updated</td>
-                </tr>
-                <tr>
-                    <td>NEW</td>
-                    <td>
-                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Need help with...</a>
-                    </td>
-                    <td>Bella</td>
-                    <td>someone</td>
-                    <td>Low</td>
-                    <td>2017-05-25</td>
-                    <td>2017-06-01</td>
-                </tr>
-                <tr>
-                    <td>OPEN</td>
-                    <td>
-                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Do not find sumbit...</a>
-                    </td>
-                    <td>Tylor</td>
-                    <td>someone</td>
-                    <td>Normal</td>
-                    <td>2017-05-25</td>
-                    <td>2017-06-01</td>
-                </tr>
-                <tr>
-                    <td>AWAITING</td>
-                    <td>
-                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Why some tags does not....</a>
-                    </td>
-                    <td>Caroline</td>
-                    <td>someone</td>
-                    <td>High</td>
-                    <td>2017-05-25</td>
-                    <td>2017-06-01</td>
-                </tr>
-                <tr>
-                    <td>IN PROCESSING</td>
-                    <td>
-                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">POST does not work...</a>
-                    </td>
-                    <td>Matt</td>
-                    <td>someone</td>
-                    <td>Very High</td>
-                    <td>2017-05-25</td>
-                    <td>2017-06-01</td>
-                </tr>
-                <tr>
-                    <td>CLOSED</td>
-                    <td>
-                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Jumping between pages has error...</a>
-                    </td>
-                    <td>Anushree</td>
-                    <td>someone</td>
-                    <td>Medium</td>
-                    <td>2017-05-25</td>
-                    <td>2017-06-01</td>
-                </tr>
-                <tr>
-                    <td>OPEN</td>
-                    <td>
-                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">DB relation between tables problem....</a>
-                    </td>
-                    <td>Jim</td>
-                    <td>someone</td>
-                    <td>Medium</td>
-                    <td>2017-02-12</td>
-                    <td>2017-06-01</td>
-                </tr>
-                <tr>
-                    <td>AWAITING</td>
-                    <td>
-                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">More...</a>
-                    </td>
-                    <td>someone</td>
-                    <td>someone</td>
-                    <td>Low</td>
-                    <td>2017-04-12</td>
-                    <td>2017-05-01</td>
-                </tr>
-                </tbody>
-            </table>
+        <a href="#" class="nav-tabs-dropdown"><h1>Issue Tracker</h1></a>
+        <!--<div id="nav-tabs-wrapper" class="nav nav-tabs nav-pills nav-stacked well" style="background-color: #FFFFFF; border: 0;">-->
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-tags fa-5x"></i>OPEN
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">26</div>
+                            <div>TOTAL!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#issueopen">
+                    <div class="panel-footer">
+                        <span class="pull-left active">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
             </div>
         </div>
-    </div>
-
-    <!-- Modal -->
-    <div id="view_issue" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header login-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h4 class="modal-title">View Issue</h4>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-green active">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-pause fa-5x"></i>AWAITING
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">12</div>
+                            <div>TOTAL!</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <label>Issue Title</label>
-                        <input type="text" placeholder="Issue Title" name="issuetitle">
-                        <br><br>
-                        <label>Status</label>
-                        <label>
-                            <select>
-                                <option value="Low">Low</option>
-                                <option value="Normal">Normal</option>
-                                <option value="Medium">Medium</option>
-                                <option value="High">High</option>
-                                <option value="Very High">Very High</option>
-                            </select>
-                        </label>
-                        <br><br>
-                        <label>Assignee</label>
-                        <input type="text" placeholder="Assignee" name="assignee">
-                        <label>Reporter</label>
-                        <input type="text" placeholder="Reporter" name="reporter">
-                        <label>Desicrption</label>
-                        <textarea placeholder="Desicrption"></textarea>
-                    </form>
+                <a href="#issueawaiting">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-play fa-5x"></i>PROCESSING
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">124</div>
+                            <div>TOTAL!</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default btn-sm" value="Close" data-dismiss="modal">
-                    <input type="button" class="btn btn-success btn-sm" value="Save" data-dismiss="modal">
+                <a href="#issueprocessing">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-stop fa-5x"></i>CLOSED
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">13</div>
+                            <div>TOTAL!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#issueclosed">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!--</div>-->
+        <!-- panel #1 -->
+        <div class="col-lg-3 col-md-6">
+            <div class="tab-content">
+                <div class="panel panel-default tab-pane fade in active" id="issueopen">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Tasks Panel</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <span class="badge">just now</span>
+                                <i class="fa fa-fw fa-calendar"></i> Calendar updated
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">4 minutes ago</span>
+                                <i class="fa fa-fw fa-comment"></i> Commented on a post
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">23 minutes ago</span>
+                                <i class="fa fa-fw fa-truck"></i> Order 392 shipped
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">46 minutes ago</span>
+                                <i class="fa fa-fw fa-money"></i> Invoice 653 has been paid
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">1 hour ago</span>
+                                <i class="fa fa-fw fa-user"></i> A new user has been added
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">2 hours ago</span>
+                                <i class="fa fa-fw fa-check"></i> Completed task: "pick up dry cleaning"
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">yesterday</span>
+                                <i class="fa fa-fw fa-globe"></i> Saved the world
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">two days ago</span>
+                                <i class="fa fa-fw fa-check"></i> Completed task: "fix error on sales page"
+                            </a>
+                        </div>
+                        <div class="text-right">
+                            <a href="#">View All Open Issues! <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
 
+        <!-- panel #2 -->
+        <div class="col-lg-3 col-md-6">
+            <div class="tab-content">
+                <div class="panel panel-default tab-pane fade in active" id="issueprocessing">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Tasks Panel</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <span class="badge">just now</span>
+                                <i class="fa fa-fw fa-calendar"></i> Calendar updated
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">4 minutes ago</span>
+                                <i class="fa fa-fw fa-comment"></i> Commented on a post
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">23 minutes ago</span>
+                                <i class="fa fa-fw fa-truck"></i> Order 392 shipped
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">46 minutes ago</span>
+                                <i class="fa fa-fw fa-money"></i> Invoice 653 has been paid
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">1 hour ago</span>
+                                <i class="fa fa-fw fa-user"></i> A new user has been added
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">2 hours ago</span>
+                                <i class="fa fa-fw fa-check"></i> Completed task: "pick up dry cleaning"
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">yesterday</span>
+                                <i class="fa fa-fw fa-globe"></i> Saved the world
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">two days ago</span>
+                                <i class="fa fa-fw fa-check"></i> Completed task: "fix error on sales page"
+                            </a>
+                        </div>
+                        <div class="text-right">
+                            <a href="#">View All Processing Issues! <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- panel #3 -->
+        <div class="col-lg-3 col-md-6">
+            <div class="tab-content">
+                <div class="panel panel-default tab-pane fade in active" id="issueawaiting">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Tasks Panel</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <span class="badge">just now</span>
+                                <i class="fa fa-fw fa-calendar"></i> Calendar updated
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">4 minutes ago</span>
+                                <i class="fa fa-fw fa-comment"></i> Commented on a post
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">23 minutes ago</span>
+                                <i class="fa fa-fw fa-truck"></i> Order 392 shipped
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">46 minutes ago</span>
+                                <i class="fa fa-fw fa-money"></i> Invoice 653 has been paid
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">1 hour ago</span>
+                                <i class="fa fa-fw fa-user"></i> A new user has been added
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">2 hours ago</span>
+                                <i class="fa fa-fw fa-check"></i> Completed task: "pick up dry cleaning"
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">yesterday</span>
+                                <i class="fa fa-fw fa-globe"></i> Saved the world
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">two days ago</span>
+                                <i class="fa fa-fw fa-check"></i> Completed task: "fix error on sales page"
+                            </a>
+                        </div>
+                        <div class="text-right">
+                            <a href="#">View All Awaiting Issues! <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- panel #4 -->
+        <div class="col-lg-3 col-md-6">
+            <div class="tab-content">
+                <div class="panel panel-default tab-pane fade in active" id="issueclosed">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Tasks Panel</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <span class="badge">just now</span>
+                                <i class="fa fa-fw fa-calendar"></i> Calendar updated
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">4 minutes ago</span>
+                                <i class="fa fa-fw fa-comment"></i> Commented on a post
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">23 minutes ago</span>
+                                <i class="fa fa-fw fa-truck"></i> Order 392 shipped
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">46 minutes ago</span>
+                                <i class="fa fa-fw fa-money"></i> Invoice 653 has been paid
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">1 hour ago</span>
+                                <i class="fa fa-fw fa-user"></i> A new user has been added
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">2 hours ago</span>
+                                <i class="fa fa-fw fa-check"></i> Completed task: "pick up dry cleaning"
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">yesterday</span>
+                                <i class="fa fa-fw fa-globe"></i> Saved the world
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">two days ago</span>
+                                <i class="fa fa-fw fa-check"></i> Completed task: "fix error on sales page"
+                            </a>
+                        </div>
+                        <div class="text-right">
+                            <a href="#">View All Closed Issues!<i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- /.row -->
-
-    <hr>
-
-    <!-- Call to Action Section -->
-    <div class="well">
-        <div class="row">
-            <div class="col-md-8">
-                <p>Here is the directly access to online chat</p>
-            </div>
-            <div class="col-md-4">
-                <a class="btn btn-lg btn-default btn-block" href="#">Go Chat</a>
-            </div>
-        </div>
-    </div>
-
-    <hr>
-
-    <!-- Footer -->
-    <footer>
-        <div class="row">
-            <div class="col-lg-12">
-                <p>Copyright &copy; Your Website 2014</p>
-            </div>
-        </div>
-    </footer>
-
 </div>
-<!-- /.container -->
-
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
-
+<script src="js/project.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/dashboard.js"></script>
 </body>
 
