@@ -75,6 +75,32 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/dashboard.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function GetUrlValue(VarSearch){
+        var SearchString = String(document.URL);
+        var arr  = SearchString.split('?');
+        console.log("caroline: " + arr);
+        var data = "txn=9"+"&project_id" + arr[1];
+            $.ajax({
+                type: "GET",
+                url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
+                data: data,
+                success: function(info){
+                    alert(info);
+                    //var tasks = JSON.parse(info);
+                    //console.log("caroline " + tasks);
+
+                },
+
+            error: function (info) {
+                console.log('An error occurred.');
+                console.log(info);
+            } 
+            });
+    });    
+</script>
 </body>
 
 
