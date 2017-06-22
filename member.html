@@ -32,7 +32,8 @@
             console.log("hi");
             var script = document.createElement("script");
             script.type = "text/javascript";
-            script.src = "js/member.js"; 
+            script.src = "js/member.js";
+            console.log("in");
             document.getElementsByTagName("head")[0].appendChild(script);
                 return false;
         }
@@ -45,35 +46,35 @@
 <div class="user-dashboard">
     <h1> Members</h1>
     <div class="row">
-                <header>
-                    <div class="col-md-7">
-                        <nav class="navbar-default pull-left">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas" data-target="#side-menu" aria-expanded="false">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                            </div>
-                        </nav>
+        <header>
+            <div class="col-md-7">
+                <nav class="navbar-default pull-left">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas" data-target="#side-menu" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
                     </div>
-                    <div class="col-md-5">
-                        <div class="header-rightside">
-                            <ul class="list-inline header-top pull-right">
-                                <li class="hidden-xs"><a href="#" class="add-member" data-toggle="modal" data-target="#add_member">Add member</a></li>
-                                <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-                                <li>
-                                    <a href="#" class="icon-info">
-                                        <i class="fa fa-bell" aria-hidden="true"></i>
-                                        <span class="label label-primary">3</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </header>
+                </nav>
             </div>
+            <div class="col-md-5">
+                <div class="header-rightside">
+                    <ul class="list-inline header-top pull-right">
+                        <li class="hidden-xs"><a href="#" class="add-member" data-toggle="modal" data-target="#add_member">Add member</a></li>
+                        <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+                        <li>
+                            <a href="#" class="icon-info">
+                                <i class="fa fa-bell" aria-hidden="true"></i>
+                                <span class="label label-primary">3</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+    </div>
     <!--<div class="table-responsive">-->
         <!--<table class="table table-striped">-->
             <!--<tbody id="memdata">-->
@@ -84,27 +85,28 @@
         <ul id="memdata">
         </ul>
     </div>
-</div>
-<div id="add_member" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Edit/Delete Modal content-->
-        <div class="modal-content">
-            <div class="modal-header login-header">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-                <h4 class="modal-title">Update member</h4>
-            </div>
-            <div class="modal-body">
-                <label class="control-label" style="width: 100%;">
-                    <input type="text" class="form-control input-md" placeholder="User Name" id="user_name" name="user_name">
-                </label>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id="add-member" onclick="new_member()" class="btn btn-primary" data-dismiss="modal">Save</button>
+    <div id="add_member" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Edit/Delete Modal content-->
+            <div class="modal-content">
+                <div class="modal-header login-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Update member</h4>
+                </div>
+                <div class="modal-body">
+                    <label class="control-label" style="width: 100%;">
+                        <input type="text" class="form-control input-md" placeholder="User Name" id="user_name" name="user_name">
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="add-member" onclick="new_member()" class="btn btn-primary" data-dismiss="modal">Save</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 <!-- go tasks button -->
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
