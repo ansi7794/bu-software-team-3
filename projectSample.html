@@ -11,6 +11,11 @@
 
     <title>CS675 term project</title>
 
+    <style>
+        @import url('css/dialog.css');
+        @import "css/dashboard.css";
+        @import "css/sidebar.css";
+    </style>
     <link href="css/sidebar.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +40,7 @@
             console.log("hi");
             var script = document.createElement("script");
             script.type = "text/javascript";
-            script.src = "js/project.js"; 
+            script.src = "js/project.js";
             document.getElementsByTagName("head")[0].appendChild(script);
                 return false;
         }
@@ -120,6 +125,7 @@
                             </li>
                         </ul>
                     </li>
+
                     <li>
                         <a href="#"><i class="fa fa-fw fa-comments"></i> Chat Room</a>
                     </li>
@@ -142,53 +148,11 @@
                     </li>
                 </ol>
             </div>
-            <div class="row">
-                <header>
-                    <div class="col-md-7">
-                        <nav class="navbar-default pull-left">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas" data-target="#side-menu" aria-expanded="false">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                            </div>
-                        </nav>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="header-rightside">
-                            <ul class="list-inline header-top pull-right">
-                                <li class="hidden-xs"><a href="#" class="add-project" data-toggle="modal" data-target="#add_project">Add Project</a></li>
-                                <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-                                <li>
-                                    <a href="#" class="icon-info">
-                                        <i class="fa fa-bell" aria-hidden="true"></i>
-                                        <span class="label label-primary">3</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </header>
-            </div>
             <!-- iframes -->
             <div class="col-lg-12">
                 <iframe id="prodetail" name="prodetail" src="project.html" style="width: 100%; height: 900px; border: 0; margin-top: auto; "></iframe>
             </div>
-            <!-- Search Bar -->
-            <div class="col-md-12">
-                <div id="user-search-input">
-                    <div class="input-group col-md-12">
-                        <input type="text" class="form-control input-lg" placeholder="Search" />
-                        <span class="input-group-btn">
-                        <button class="btn btn-info btn-lg" type="button">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </span>
-                    </div>
-                </div>
-            </div>
+
         </div>
         <!-- /.row -->
     </div>
@@ -196,36 +160,6 @@
 </div>
 <!-- /#page-wrapper -->
 </div>
-<div id="add_project" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Edit/Delete Modal content-->
-        <div class="modal-content">
-            <div class="modal-header login-header">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-                <h4 class="modal-title">Update Project</h4>
-            </div>
-            <div class="modal-body">
-                <label class="control-label" style="width: 100%;">
-                    <input type="text" class="form-control input-md" placeholder="Project Name" id="project_name" name="project_name">
-                </label>
-                <label class="control-label" style="width: 100%;">
-                    <input type="text" class="form-control input-md" placeholder="Project Creator" id="project_creator" name="project_creator">
-                </label>
-                <label class="control-label" style="width: 100%;">
-                    <input type="text" class="form-control input-md" placeholder="Project Status" id="project_status" name="project_status">
-                </label>
-                <label class="control-label" style="width: 100%;">
-                    <input type="text" class="form-control input-md" placeholder="Project Description" id="project_description" name="project_description" style="height: 200px;">
-                </label>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id="add-project" onclick="new_project()" class="btn btn-primary" data-dismiss="modal">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
-
     <hr>
 <!-- /.wrapper -->
 
@@ -250,7 +184,7 @@
         var userinfo = "<h3 style='text-align: center'>" + userJSON.user_name + "</h3>" + "<p style='text-align: center'>" + userJSON.user_fname + "&nbsp;&nbsp;" + userJSON.user_lname + "</p>" + "<p style='text-align: center'><i class='fa fa-envelope-o'></i>&nbsp;" + userJSON.user_email + "</p>";
 
         $(userinfo).appendTo("#userdata");
-        
+
         var projectlist;
         var listlen;
         $.ajax({
@@ -273,6 +207,10 @@
                         + proJSON.project_name
                         +"</span></a></li>";
                     $(proinfo).appendTo("#prodata");
+//                    $("head").appendTo("<link href='css/dialog.css' rel='tylesheet'>" +
+//                        "<link href='css/modern-business.css' rel='stylesheet'>" +
+//                        "<link href='css/dashboard.css' rel='stylesheet'>" +
+//                        "<link href='css/morris.css' rel='stylesheet'>");
                     console.log(proinfo);
                 }
             },
