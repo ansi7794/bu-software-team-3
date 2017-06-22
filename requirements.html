@@ -1,23 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CS675 term project</title>
+
+    <link href="css/project.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="css/dialog.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script>
+        $(document).ready(function(){
+            $("requirementstimeline").click(function (e) {
+                e.preventDefault();
+                $("#prodetail").attr("src", $(this).attr("href"));
+            })
+        });
+    </script>
 </head>
+
 <body>
-<h1>COMING SOOM.....</h1>
+<!-- container -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>
+                Requirements Table <a href="requirements_timeline.html" target="prodetail" id="requirementstimeline"><small>View Time Line</small></a>
+            </h2>
+        </div>
+        <div class="col-lg-12">
+            <header>
+                <div class="col-lg-7">
+                    <nav class="navbar-default pull-left">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas" data-target="#side-menu" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                    </nav>
+                </div>
+                <div class="col-md-5">
+                    <div class="header-rightside">
+                        <ul class="list-inline header-top pull-right">
+                            <li class="hidden-xs"><a href="#" class="add-requirements" data-toggle="modal" data-target="#add_requirements">Add requirements</a></li>
+                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+                            <li>
+                                <a href="#" class="icon-info">
+                                    <i class="fa fa-bell" aria-hidden="true"></i>
+                                    <span class="label label-primary">3</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <tbody>
+                <tr>
+                    <td><h4 class="sortstatus">Status</h4></td>
+                    <td><h4>Title</h4></td>
+                    <td><h4>Description</h4></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="tnew"><a href="#">NEW</a></td>
+                    <td>
+                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Need help with...</a>
+                    </td>
+                    <td>Working on UML</td>
+                    <td align="center">
+                        <a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_requirements"><em class="fa fa-pencil"></em></a>
+                        <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="thold"><a href="#">HOLD</a></td>
+                    <td>
+                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Do not find sumbit...</a>
+                    </td>
+                    <td>JSP Application Core</td>
+                    <td align="center">
+                        <a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_requirements"><em class="fa fa-pencil"></em></a>
+                        <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tprocess"><a href="#">IN PROCESS</a></td>
+                    <td>
+                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Why some tags does not....</a>
+                    </td>
+                    <td>JSP Application Core</td>
+                    <td align="center">
+                        <a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_requirements"><em class="fa fa-pencil"></em></a>
+                        <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tcompleted"><a href="#">COMPLETED</a></td>
+                    <td>
+                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">POST does not work...</a>
+                    </td>
+                    <td>UI Development</td>
+                    <td align="center">
+                        <a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_requirements"><em class="fa fa-pencil"></em></a>
+                        <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="thold"><a href="#">ON HOLD</a></td>
+                    <td>
+                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Jumping between pages has error...</a>
+                    </td>
+                    <td>UI Development</td>
+                    <td align="center">
+                        <a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_requirements"><em class="fa fa-pencil"></em></a>
+                        <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tcancelled"><a href="#">CANCELLED</a></td>
+                    <td>
+                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">DB relation between tables problem....</a>
+                    </td>
+                    <td>UI Development</td>
+                    <td align="center">
+                        <a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_requirements"><em class="fa fa-pencil"></em></a>
+                        <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tnew"><a href="#">NEW</a></td>
+                    <td>
+                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">More...</a>
+                    </td>
+                    <td>More...</td>
+                    <td align="center">
+                        <a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_requirements"><em class="fa fa-pencil"></em></a>
+                        <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Edit/Delete Modal -->
+    <div id="edit_requirements" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header login-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Update requirements</h4>
+                </div>
+                <div class="modal-body">
+                    <label class="control-label" style="width: 100%;">requirements Title
+                        <input type="text" class="form-control" name="requirements_title">
+                    </label>
+                    <label class="control-label" style="width: 100%;">Assignee
+                        <input type="text" class="form-control" name="requirements_assignee">
+                    </label>
+                    <label class="control-label" style="width: 100%;">Followers
+                        <input type="text" class="form-control" name="requirements_followers">
+                    </label>
+                    <label class="control-label" style="width: 100%;">Description
+                        <input type="text" class="form-control" name="requirements_description">
+                    </label>
+                    <label class="control-label">Status</label>
+                    <label>
+                        <select>
+                            <option value="new">NEW</option>
+                            <option value="inprocess">IN PROCESS</option>
+                            <option value="completed">COMPLETED</option>
+                            <option value="cancelled">CANCELLED</option>
+                            <option value="onhold">ON HOLD</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="cancel btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Modal content -->
+    <div id="add_requirements" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header login-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Add New requirements</h4>
+                </div>
+                <div class="modal-body">
+                    <label class="control-label" style="width: 100%;">requirements Title
+                        <input type="text" class="form-control" name="requirements_title">
+                    </label>
+                    <label class="control-label" style="width: 100%;">Assignee
+                        <input type="text" class="form-control" name="requirements_assignee">
+                    </label>
+                    <label class="control-label" style="width: 100%;">Followers
+                        <input type="text" class="form-control" name="requirements_followers">
+                    </label>
+                    <label class="control-label" style="width: 100%;">Description
+                        <input type="text" class="form-control" name="requirements_description">
+                    </label>
+                    <label class="control-label">Status</label>
+                    <label>
+                        <select style="border-radius: 5%;">
+                            <option value="new">NEW</option>
+                            <option value="inprocess">IN PROCESS</option>
+                            <option value="completed">COMPLETED</option>
+                            <option value="cancelled">CANCELLED</option>
+                            <option value="onhold">ON HOLD</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="cancel btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="js/dashboard.js"></script>
 </body>
+
 </html>
-
-UI is ready for presentation.Please check it.
-
-Modifications:
-1. active sidebar buttons: "issues" & "tracking list", once one of them is clicked, iframe will jump to specified page
-2. create tasks table (alltasks page) and requirement blank page.
-3. set links to "requirement" card (blue) and "task" card (green), user can click the little arrow icon.
-4. beautify all dialogs (add, edit)
-5. beautify issues table
-6. For tracking list, we can talk more tonight. Did a little change for this page.
-7. Find an interesting component - time line. Created a task_timeline static page, talk more tonight.
-
-I will fix all div tags to make our project fit mobile screen during iteration 2.
