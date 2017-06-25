@@ -89,113 +89,18 @@
     </div>
     <div class="col-lg-12">
         <div class="table-responsive">
-            <table class="table table-striped table-hover">
+            <table class="table table-hover">
+                <thead> 
+                    <tr>
+                        <td><h4 class="sortstatus">Status</h4></td>
+                        <td><h4>Title</h4></td>
+                        <td><h4>Description</h4></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
                 <tbody>
-                <tr>
-                    <td><h4 class="sortstatus">Status</h4></td>
-                    <td><h4>Title</h4></td>
-                    <td><h4>Description</h4></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <!-- <tr>
-                    <td class="tnew"><a href="#">NEW</a></td>
-                    <td>
-                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Need help with...</a>
-                    </td>
-                    <td>Working on UML</td>
-                    <td align="center">
-                        <a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_requirements"><em class="fa fa-pencil"></em></a>
-                        <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
-                    </td>
-                    <td align="center">
-                        <a href="alltasks.html" target="prodetail" id="requirement1"><em class="fa fa-eye"></em></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="thold"><a href="#">HOLD</a></td>
-                    <td>
-                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Do not find sumbit...</a>
-                    </td>
-                    <td>JSP Application Core</td>
-                    <td align="center">
-                        <a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_requirements"><em class="fa fa-pencil"></em></a>
-                        <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
-                    </td>
-                    <td align="center">
-                        <a href="alltasks.html" target="prodetail" id="requirement2"><em class="fa fa-eye"></em></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tprocess"><a href="#">IN PROCESS</a></td>
-                    <td>
-                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Why some tags does not....</a>
-                    </td>
-                    <td>JSP Application Core</td>
-                    <td align="center">
-                        <a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_requirements"><em class="fa fa-pencil"></em></a>
-                        <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
-                    </td>
-                    <td align="center">
-                        <a href="alltasks.html" target="prodetail" id="requirement3"><em class="fa fa-eye"></em></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tcompleted"><a href="#">COMPLETED</a></td>
-                    <td>
-                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">POST does not work...</a>
-                    </td>
-                    <td>UI Development</td>
-                    <td align="center">
-                        <a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_requirements"><em class="fa fa-pencil"></em></a>
-                        <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
-                    </td>
-                    <td align="center">
-                        <a href="alltasks.html" target="prodetail" id="requirement4"><em class="fa fa-eye"></em></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="thold"><a href="#">ON HOLD</a></td>
-                    <td>
-                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Jumping between pages has error...</a>
-                    </td>
-                    <td>UI Development</td>
-                    <td align="center">
-                        <a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_requirements"><em class="fa fa-pencil"></em></a>
-                        <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
-                    </td>
-                    <td align="center">
-                        <a href="alltasks.html" target="prodetail" id="requirement5"><em class="fa fa-eye"></em></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tcancelled"><a href="#">CANCELLED</a></td>
-                    <td>
-                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">DB relation between tables problem....</a>
-                    </td>
-                    <td>UI Development</td>
-                    <td align="center">
-                        <a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_requirements"><em class="fa fa-pencil"></em></a>
-                        <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
-                    </td>
-                    <td align="center">
-                        <a href="alltasks.html" target="prodetail" id="requirement6"><em class="fa fa-eye"></em></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tnew"><a href="#">NEW</a></td>
-                    <td>
-                        <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">More...</a>
-                    </td>
-                    <td>More...</td>
-                    <td align="center">
-                        <a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_requirements"><em class="fa fa-pencil"></em></a>
-                        <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
-                    </td>
-                    <td align="center">
-                        <a href="alltasks.html" target="prodetail" id="requirement7"><em class="fa fa-eye"></em></a>
-                    </td>
-                </tr> -->
+                    <th id="requirements_data"></th>
                 </tbody>
             </table>
         </div>
@@ -290,6 +195,7 @@
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/dashboard.js"></script>
+
 <script type="text/javascript">
      $(document).ready(function GetUrlValue(VarSearch){
         var SearchString = String(document.URL);
@@ -304,10 +210,51 @@
                     //projects = info.replace(/\n/gm," ").split(" ");
                     //projectlist = projects.filter(function(v){if(v.startsWith("{")) {return v.endsWith("}")} else{return false}});
                     info = info.replace(/\n/gm,"");
-                    info = info.replace("}" , "},~badpractice");
-                    var arr = info.split(",~badpractice");
-                    console.log(arr);
-                    var parsedJSON = JSON.parse(arr);
+                    info = info.replace(/}{/g, "}.,{");
+                    var arr = info.split(".,");
+                    console.log(arr[0]);
+                    for(var i = 0; i<arr.length; i++){
+                        var parsedJSON = JSON.parse(arr[i]);
+                        console.log(parsedJSON);
+                        var htmlStatus = 
+                        "<tr>"+
+                        "<td>"+
+                            '<a href=\"#\" class=\"view-issue\" data-toggle=\"modal\" data-target=\"#view_issue\">'+ parsedJSON.requirement_status +'</a>'+
+                        "</td>";
+
+                        var htmlTitle =
+                        "<td>"+
+                            '<a href=\"#\" class=\"view-issue\" data-toggle=\"modal\" data-target=\"#view_issue\">'+ parsedJSON.requirement_title +'</a>'+
+                        "</td>";
+
+                        var htmlDescription = 
+                        "<td>"+
+                            '<a href=\"#\" class=\"view-issue\" data-toggle=\"modal\" data-target=\"#view_issue\">'+ parsedJSON.requirement_description +'</a>'+
+                        "</td>"
+
+                        var htmlEditButton = 
+                        "<td>"+
+                                '<a class=\"btn btn-default edit-issue\" data-toggle=\"modal\" data-target=\"#edit_requirements\"><em class=\"fa fa-pencil\"></em></a>' + 
+                        "</td>";
+
+
+                        var htmlTrashButton = 
+                        "<td>"+
+                                '<a class=\"btn btn-danger\"><em class=\"fa fa-trash\"></em></a>'
+                        "</td>";
+
+                        var htmlTaskButton = 
+                        "<td>"+
+                                '<a href=\"alltasks.html\" target=\"prodetail\" id=\"requirement2\"><em class=\"fa fa-eye\"></em></a>' + 
+                        "</td>"
+                        "</tr>";
+
+
+                        var requirements_info = htmlStatus + htmlTitle + htmlDescription + htmlEditButton + htmlTrashButton + htmlTaskButton;
+                        console.log(requirements_info);
+                        $("#requirements_data").append(requirements_info);
+                    }
+
                 },
 
             error: function (info) {
