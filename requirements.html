@@ -98,7 +98,7 @@
                     <td></td>
                     <td></td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td class="tnew"><a href="#">NEW</a></td>
                     <td>
                         <a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Need help with...</a>
@@ -195,7 +195,7 @@
                     <td align="center">
                         <a href="alltasks.html" target="prodetail" id="requirement7"><em class="fa fa-eye"></em></a>
                     </td>
-                </tr>
+                </tr> -->
                 </tbody>
             </table>
         </div>
@@ -301,10 +301,13 @@
                 url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
                 data: data,
                 success: function(info){
-                    console.log(info);
-                    //var tasks = JSON.parse(info);
-                    //console.log("caroline " + tasks);
-
+                    //projects = info.replace(/\n/gm," ").split(" ");
+                    //projectlist = projects.filter(function(v){if(v.startsWith("{")) {return v.endsWith("}")} else{return false}});
+                    info = info.replace(/\n/gm,"");
+                    info = info.replace("}" , "},~badpractice");
+                    var arr = info.split(",~badpractice");
+                    console.log(arr);
+                    var parsedJSON = JSON.parse(arr);
                 },
 
             error: function (info) {
