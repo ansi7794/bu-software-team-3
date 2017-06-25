@@ -66,10 +66,19 @@
         }
     </script>
 
+    <script type="text/javascript">
+        function MyFunction(pro_id){
+            var loc = "requirements.html?"+ String(pro_id) ;
+            //console.log(loc);
+            var link = document.getElementById('requirements');
+            link.setAttribute('href', loc);
+        }
+    </script>
+
     <!-- Active requirements & tasks cards -->
     <script>
         $(document).ready(function(){
-            $("tasks").click(function(e) {
+            $("requirements").click(function(e) {
                 e.preventDefault();
                 $("#prodetail").attr("src", $(this).attr("href"));
             })
@@ -230,6 +239,7 @@
             success: function (info) {
                 console.log("yeah");
                 console.log(info);
+                alert(info)
                 var projects = info.replace(/\n/gm,"");
                 var detailsJSON = JSON.parse(projects);
                 console.log(detailsJSON);
@@ -303,16 +313,16 @@
                     "<i class='glyphicon glyphicon-stop'></i><p>Make a chatroon feature</p>" +
                     "</div></div></div>" +
                     "</div><hr><br>";
-//                var taskcard = "<div class='row'><div class='col-md-12'><div class='panel panel-primary'>" +
-//                    "<div class='panel-heading'><div class='row'><div class='col-xs-3'>" +
-//                    "<div class='huge'>8</div><div>New Requirements!</div>" +
-//                    "</div></div></div> " +
-//                    "<a href='requirements.html' target='prodetail' id='requirements'>" +
-//                    "<div class='panel-footer'>" +
-//                    "<span class='pull-left'>View Requirements</span><span class='pull-right'><i class='fa fa-arrow-circle-o-right'></i></span><div class='clearfix'></div>" +
-//                    "</div>" +
-//                    "</a>" +
-//                    "</div></div>a</div>";
+               // var taskcard = "<div class='row'><div class='col-md-12'><div class='panel panel-primary'>" +
+               //     "<div class='panel-heading'><div class='row'><div class='col-xs-3'>" +
+               //     "<div class='huge'>8</div><div>New Requirements!</div>" +
+               //     "</div></div></div> " +
+               //     "<a href='requirements.html' target='prodetail' id='requirements'>" +
+               //     "<div class='panel-footer'>" +
+               //     "<span class='pull-left'>View Requirements</span><span class='pull-right'><i class='fa fa-arrow-circle-o-right'></i></span><div class='clearfix'></div>" +
+               //     "</div>" +
+               //     "</a>" +
+               //     "</div></div>a</div>";
 
                 var projectinfo = "<h1>"
                     +detailsJSON.project_name
@@ -324,11 +334,12 @@
                     +"</td></tr><tr><td><b>Project description</b></td><td>"
                     +detailsJSON.project_description
                     +"</td></tr></tbody></table><div class='text-right'><a class='btn btn-default'data-toggle='modal' data-target='#edit_project'><em class='fa fa-pencil'></em></a><a class='btn btn-danger'><em class='fa fa-trash'></em></a></div>"
-                    + "<hr>" + taskcard +
+                    + "<hr>" + /*taskcard +*/
                     "<iframe id='memdetail' src=\"member.html?"+detailsJSON.project_id+ "\" style='width: 100%; height: 700px; border: 0'></iframe><hr></br></br>"
                     + tasklist + taskbutton + "<br><hr></br></br>"
                     + issuelist + issuebutton + "<br><hr><br>";
                 console.log(projectinfo);
+                MyFunction(detailsJSON.project_id);
                 $(projectinfo).appendTo("#prodata");
                 //"project_description":"Project management application for software engineering class","project_creator":"Jim","project_id":"id1234","project_status":"on track ","project_name":"id1234"
             },
