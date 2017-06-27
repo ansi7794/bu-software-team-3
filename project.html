@@ -55,17 +55,6 @@
         });
     </script>
 
-    <script>
-        function new_project(){
-            console.log("hi");
-            var script = document.createElement("script");
-            script.type = "text/javascript";
-            script.src = "js/project.js";
-            document.getElementsByTagName("head")[0].appendChild(script);
-            return false;
-        }
-    </script>
-
     <script type="text/javascript">
         function MyFunction(pro_id){
             var loc = "requirements.html?"+ String(pro_id) ;
@@ -134,20 +123,7 @@
                             </div>
                         </nav>
                     </div>
-                    <div class="col-md-5">
-                        <div class="header-rightside">
-                            <ul class="list-inline header-top pull-right">
-                                <li class="hidden-xs"><a href="#" class="add-project" data-toggle="modal" data-target="#add_project">Add Project</a></li>
-                                <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-                                <li>
-                                    <a href="#" class="icon-info">
-                                        <i class="fa fa-bell" aria-hidden="true"></i>
-                                        <span class="label label-primary">3</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    
                 </header>
             </div>
             <div class="row">
@@ -188,36 +164,7 @@
 </div>
 
     <!-- Add Modal content -->
-    <div id="add_project" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header login-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h4 class="modal-title">Add New Project</h4>
-                </div>
-                <div class="modal-body">
-                    <label class="control-label" style="width: 100%;">
-                        <input type="text" class="form-control input-md" id = "project_name" placeholder="Project Name" name="project_name">
-                    </label>
-                    <label class="control-label" style="width: 100%;">
-                        <input type="text" class="form-control input-md" id = "project_creator" placeholder="Project Creator" name="project_creator">
-                    </label>
-                    <label class="control-label" style="width: 100%;">
-                        <input type="text" class="form-control input-md" id = "project_status" placeholder="Project Status" name="project_status">
-                    </label>
-                    <label class="control-label" style="width: 100%;">
-                        <input type="text" class="form-control input-md" id = "project_description" placeholder="Project Description" name="project_description" style="height: 200px;">
-                    </label>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="cancel btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" id="add-project" onclick="new_project()" class="add-project btn btn-primary" data-dismiss="modal">Save</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
+    
 </div>
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
