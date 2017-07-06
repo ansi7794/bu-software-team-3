@@ -31,19 +31,29 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script>
-        $(document).ready(function(){
-            $("taskstimeline").click(function (e) {
-                e.preventDefault();
-                $("#prodetail").attr("src", $(this).attr("href"));
-            })
-        });
-    </script>
+    <!--<script type="text/javascript">-->
+        <!--$(document).ready(function(){-->
+            <!--$("#taskstimeline").click(function (e) {-->
+                <!--e.preventDefault();-->
+                <!--$("#prodetail").attr("src", $(this).attr("href"));-->
+            <!--})-->
+        <!--});-->
+    <!--</script>-->
 
     <!-- add new task -->
-    <script>
-
-    </script>
+    <!--<script type="text/javascript">-->
+        <!--$(document).ready(function(){-->
+            <!--$("#add-task").click(function (e) {-->
+                <!--console.log("add task!!");-->
+                <!--var script = document.createElement("script");-->
+                <!--script.type = "text/javascript";-->
+                <!--script.src = "js/task.js";-->
+                <!--document.getElementsByTagName("head")[0].appendChild(script);-->
+                <!--return false;-->
+            <!--})-->
+        <!--})-->
+    <!--</script>-->
+    <!-- post task id -->
 </head>
 
 <body>
@@ -115,27 +125,33 @@
                 </div>
                 <div class="modal-body">
                     <label class="control-label" style="width: 100%;">Task Title
-                        <input type="text" class="form-control" name="task_title">
+                        <input type="text" class="form-control" name="task_name">
                     </label>
                     <label class="control-label" style="width: 100%;">Assignee
                         <input type="text" class="form-control" name="task_assignee">
                     </label>
-                    <label class="control-label" style="width: 100%;">Followers
-                        <input type="text" class="form-control" name="task_followers">
-                    </label>
+                    <!--<label class="control-label" style="width: 100%;">Followers-->
+                        <!--<input type="text" class="form-control" name="task_followers">-->
+                    <!--</label>-->
                     <label class="control-label" style="width: 100%;">Description
                         <input type="text" class="form-control" name="task_description">
                     </label>
-                    <label class="control-label">Status</label>
-                    <label>
-                        <select>
-                            <option value="new">NEW</option>
-                            <option value="inprocess">IN PROCESS</option>
-                            <option value="completed">COMPLETED</option>
-                            <option value="cancelled">CANCELLED</option>
-                            <option value="onhold">ON HOLD</option>
-                        </select>
+                    <label class="control-label" style="width: 100%;">Status
+                        <input type="text" class="form-control" name="task_status">
                     </label>
+                    <!--<label class="control-label" style="width: 100%;">Due Date-->
+                        <!--<input type="text" class="form-control" name="tasks_status">-->
+                    <!--</label>-->
+                    <!--<label class="control-label">Status</label>-->
+                    <!--<label>-->
+                        <!--<select>-->
+                            <!--<option value="new">NEW</option>-->
+                            <!--<option value="inprocess">IN PROCESS</option>-->
+                            <!--<option value="completed">COMPLETED</option>-->
+                            <!--<option value="cancelled">CANCELLED</option>-->
+                            <!--<option value="onhold">ON HOLD</option>-->
+                        <!--</select>-->
+                    <!--</label>-->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="cancel btn btn-default" data-dismiss="modal">Close</button>
@@ -156,31 +172,34 @@
                 </div>
                 <div class="modal-body">
                     <label class="control-label" style="width: 100%;">Task Title
-                        <input type="text" class="form-control" name="task_title">
+                        <input type="text" class="form-control" name="task_name" id="add_task_name">
                     </label>
                     <label class="control-label" style="width: 100%;">Assignee
-                        <input type="text" class="form-control" name="task_assignee">
+                        <input type="text" class="form-control" name="task_assignee" id="add_task_assignee">
                     </label>
-                    <label class="control-label" style="width: 100%;">Followers
-                        <input type="text" class="form-control" name="task_followers">
-                    </label>
+                    <!--<label class="control-label" style="width: 100%;">Followers-->
+                        <!--<input type="text" class="form-control" name="task_followers">-->
+                    <!--</label>-->
                     <label class="control-label" style="width: 100%;">Description
-                        <input type="text" class="form-control" name="task_description">
+                        <input type="text" class="form-control" name="task_description" id="add_task_description" >
                     </label>
-                    <label class="control-label">Status</label>
-                    <label>
-                        <select style="border-radius: 5%;">
-                            <option value="new">NEW</option>
-                            <option value="inprocess">IN PROCESS</option>
-                            <option value="completed">COMPLETED</option>
-                            <option value="cancelled">CANCELLED</option>
-                            <option value="onhold">ON HOLD</option>
-                        </select>
+                    <label class="control-label" style="width: 100%;">Status
+                        <input type="text" class="form-control" name="task_status" id="add_task_status">
                     </label>
+                    <!--<label class="control-label">Status</label>-->
+                    <!--<label>-->
+                        <!--<select style="border-radius: 5%;">-->
+                            <!--<option value="new">NEW</option>-->
+                            <!--<option value="inprocess">IN PROCESS</option>-->
+                            <!--<option value="completed">COMPLETED</option>-->
+                            <!--<option value="cancelled">CANCELLED</option>-->
+                            <!--<option value="onhold">ON HOLD</option>-->
+                        <!--</select>-->
+                    <!--</label>-->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="cancel btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                    <button type="button" id="add-task1" class="btn btn-primary" data-dismiss="modal">Save</button>
                 </div>
             </div>
         </div>
@@ -193,12 +212,16 @@
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/dashboard.js"></script>
-
-<script src="text/javascript">
+<script src="js/task.js"></script>
+<script type="text/javascript">
     $(document).ready(function GetUrlValue(VarSearch){
-        var SeachString = String(document.URL);
+        var SearchString = String(document.URL);
         var arr = SearchString.split('?');
-        console.log("tasks: " + arr[1]);
+        console.log("task id test = " + arr[1]);
+//        var arr = {};
+//        location.search.substr(1).split("&").forEach(function(item) {
+//            arr[item.split("=")[0]] = item.split("=")[1]
+//        });
 
         var data = "txn=10" + "&requirement_id=" + arr[1];
         $.ajax({
@@ -206,28 +229,33 @@
             url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
             data: data,
             success: function (info) {
-                info = info.replace(/\n/gm, "");
-                info = info.replace(/}{/g, "}.,{");
-                var arr = info.split(".,");
-                console.log(arr[0]);
-                for(var i=0; i<arr.length; i++){
-                    var taskJSON = JSON.parse(arr[i]);
-                    console.log(taskJSON);
-                    var tasks_info = "<tr>" +
-                        "<td class=\"t" + taskJSON.status + "\"><a href='#'>" + taskJSON.task_status + "</a></td>" +
-                        "<td><a href='#'>" + taskJSON.task_name + "</a></td>" +
-                        "<td><a href='#'>" + taksJSON.task_description + "</a></td>" +
-                        "<td align='center'>" +
-                        "<a class='btn btn-default edit-task' data-toggle='modal' data-target='#edit_task'><em class='fa fa-pencil'></em></a>" +
-                        "<a class='btn btn-danger'><em class='fa fa-trash'></em></a>" +
-                        "</td>" +
-                        "</tr>";
-
-                    console.log(tasks_info);
-                    $("#tasks_data").append(tasks_info);
+                console.log(info);
+                if(info) {
+                    info = info.replace(/\n/gm, "");
+                    info = info.replace(/}{/gm, "};{");
+                    var tasks = info.split(";");
+                    console.log("tasks 1 = " + tasks[0]);
+                    console.log("length = " + tasks.length);
+                    for (var i = 0; i < tasks.length; i++) {
+                        console.log(i);
+                        var taskJSON = JSON.parse(tasks[i]);
+                        console.log(taskJSON);
+                        var task_list = "<tr>" +
+                            "<td><a href='#' class=\"t" + taskJSON.task_status + "\">" + taskJSON.task_status + "</a></td>" +
+                            "<td><a href='#'>" + taskJSON.task_name + "</a></td>" +
+                            "<td><a href='#'>" + taskJSON.task_description + "</a></td>" +
+                            "<td align='center'>" +
+                            "<a class='btn btn-default edit-task' data-toggle='modal' data-target='#edit_task'><em class='fa fa-pencil'></em></a>" +
+                            "<a class='btn btn-danger'><em class='fa fa-trash'></em></a>" +
+                            "</td>" +
+                            "</tr>";
+                        $("#tasks_data").append(task_list);
+                        }
+                    }
+                else{
+                    alert("NO TASK!");
                 }
             },
-
             error: function (info) {
                 console.log('An error occurred!');
                 console.log(info);
