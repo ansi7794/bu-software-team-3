@@ -34,33 +34,19 @@
         function MyFunction(requirement_id){
             var loc = "alltasks.html?"+ String(requirement_id) ;
             console.log(loc);
-            var link = document.getElementById('requirement2');
-            link.setAttribute('href', loc);
+            document.getElementById('requirement2').href = loc;
+            window.location.href=loc;
         }
     </script>
     <script>
-        $(document).ready(function(){
-            $("requirementstimeline").click(function (e) {
-                e.preventDefault();
-                $("#prodetail").attr("src", $(this).attr("href"));
-            });
-
-            $("requirement1").click(function (e) {
-                e.preventDefault();
-                $("#requirement1").attr("src", $(this).attr("href"));
-            });
-
-
-            $("#add-requirement").click(function(e){
-                var script = document.createElement("script");
-                script.type = "text/javascript";
-                script.src = "js/add-requirement.js";
-                document.getElementsByTagName("head")[0].appendChild(script);
-                return false;
-            });
-
-
-        });
+        function savefunc(){
+            console.log("inside click event");
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.src = "js/add-requirement.js";
+            document.getElementsByTagName("head")[0].appendChild(script);
+            return false;
+        }
     </script>
      
 </head>
@@ -194,7 +180,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="cancel btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" id="add-requirement" class="add-requirement btn btn-primary" data-dismiss="modal">Save</button>
+                    <button type="button" onclick="savefunc()" id="add-requirement2" class="add-requirement btn btn-primary" data-dismiss="modal">Save</button>
                 </div>
             </div>
         </div>
@@ -224,8 +210,9 @@
                     info = info.replace(/\n/gm,"");
                     info = info.replace(/}{/g, "}.,{");
                     var arr = info.split(".,");
-                    console.log(arr[0]);
-                    for(var i = 0; i<arr.length; i++){
+                    console.log("ARRAY LENGTH " + arr.length);
+                    var i = 0;
+                    for(i = 0; i<arr.length; i++){
                         var parsedJSON = JSON.parse(arr[i]);
                         console.log(parsedJSON);
                         var htmlStatus = 
