@@ -30,6 +30,14 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script type="text/javascript">
+        function MyFunction(requirement_id){
+            var loc = "tasks.html?"+ String(requirement_id) ;
+            console.log(loc);
+            var link = document.getElementById('requirement2');
+            link.setAttribute('href', loc);
+        }
+    </script>
     <script>
         $(document).ready(function(){
             $("requirementstimeline").click(function (e) {
@@ -40,7 +48,17 @@
             $("requirement1").click(function (e) {
                 e.preventDefault();
                 $("#requirement1").attr("src", $(this).attr("href"));
-            })
+            });
+
+
+            $("#add-requirement").click(function(e){
+                alert("add-requirement");    
+                var script = document.createElement("script");
+                script.type = "text/javascript";
+                script.src = "js/add-requirement.js";
+                document.getElementsByTagName("head")[0].appendChild(script);
+                return false;
+            });
         });
     </script>
      
@@ -115,21 +133,18 @@
                     <h4 class="modal-title">Update requirements</h4>
                 </div>
                 <div class="modal-body">
-                    <label class="control-label" style="width: 100%;">requirements Title
+                    <label class="control-label" style="width: 100%;">Requirements Title
                         <input type="text" class="form-control" name="requirements_title">
                     </label>
                     <label class="control-label" style="width: 100%;">Assignee
                         <input type="text" class="form-control" name="requirements_assignee">
-                    </label>
-                    <label class="control-label" style="width: 100%;">Followers
-                        <input type="text" class="form-control" name="requirements_followers">
                     </label>
                     <label class="control-label" style="width: 100%;">Description
                         <input type="text" class="form-control" name="requirements_description">
                     </label>
                     <label class="control-label">Status</label>
                     <label>
-                        <select>
+                        <select id="requirement_status">
                             <option value="new">NEW</option>
                             <option value="inprocess">IN PROCESS</option>
                             <option value="completed">COMPLETED</option>
@@ -156,14 +171,11 @@
                     <h4 class="modal-title">Add New requirements</h4>
                 </div>
                 <div class="modal-body">
-                    <label class="control-label" style="width: 100%;">requirements Title
+                    <label class="control-label" style="width: 100%;">Requirements Title
                         <input type="text" class="form-control" name="requirements_title">
                     </label>
                     <label class="control-label" style="width: 100%;">Assignee
                         <input type="text" class="form-control" name="requirements_assignee">
-                    </label>
-                    <label class="control-label" style="width: 100%;">Followers
-                        <input type="text" class="form-control" name="requirements_followers">
                     </label>
                     <label class="control-label" style="width: 100%;">Description
                         <input type="text" class="form-control" name="requirements_description">
@@ -181,7 +193,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="cancel btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                    <button type="button" id="add-requirement" class="add-requirement btn btn-primary" data-dismiss="modal">Save</button>
                 </div>
             </div>
         </div>
@@ -244,7 +256,9 @@
 
                         var htmlTaskButton = 
                         "<td>"+
-                                '<a href=\"alltasks.html\" target=\"prodetail\" id=\"requirement2\"><em class=\"fa fa-eye\"></em></a>' + 
+                                "<a href=\"javascript:MyFunction(\'"
+                        + parsedJSON.requirement_id
+                        + "\');\" target=\"prodetail\" id=\"requirement2\"><em class=\"fa fa-eye\"></em></a>" + 
                         "</td>"
                         "</tr>";
 
