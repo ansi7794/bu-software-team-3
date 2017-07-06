@@ -52,13 +52,14 @@
 
 
             $("#add-requirement").click(function(e){
-                alert("add-requirement");    
                 var script = document.createElement("script");
                 script.type = "text/javascript";
                 script.src = "js/add-requirement.js";
                 document.getElementsByTagName("head")[0].appendChild(script);
                 return false;
             });
+
+
         });
     </script>
      
@@ -91,7 +92,7 @@
                 <div class="col-md-5">
                     <div class="header-rightside">
                         <ul class="list-inline header-top pull-right">
-                            <li class="hidden-xs"><a href="#" class="add-requirements" data-toggle="modal" data-target="#add_requirements">Add requirements</a></li>
+                            <li class="hidden-xs"><a href="#" class="add-requirement" data-toggle="modal" data-target="#add_requirements">Add requirements</a></li>
                             <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
                             <li>
                                 <a href="#" class="icon-info">
@@ -134,13 +135,13 @@
                 </div>
                 <div class="modal-body">
                     <label class="control-label" style="width: 100%;">Requirements Title
-                        <input type="text" class="form-control" name="requirements_title">
+                        <input type="text" class="form-control" name="requirements_title" id="requirements_title">
                     </label>
                     <label class="control-label" style="width: 100%;">Assignee
-                        <input type="text" class="form-control" name="requirements_assignee">
+                        <input type="text" class="form-control" name="requirements_assignee" id="requirements_assignee">
                     </label>
                     <label class="control-label" style="width: 100%;">Description
-                        <input type="text" class="form-control" name="requirements_description">
+                        <input type="text" class="form-control" name="requirements_description" id="requirements_description">
                     </label>
                     <label class="control-label">Status</label>
                     <label>
@@ -155,7 +156,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="cancel btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                    <button type="button" id="edit-requirement" class="btn btn-primary" data-dismiss="modal">Save</button>
                 </div>
             </div>
         </div>
@@ -172,17 +173,17 @@
                 </div>
                 <div class="modal-body">
                     <label class="control-label" style="width: 100%;">Requirements Title
-                        <input type="text" class="form-control" name="requirements_title">
+                        <input type="text" class="form-control" name="requirements_title" id="requirements_title">
                     </label>
                     <label class="control-label" style="width: 100%;">Assignee
-                        <input type="text" class="form-control" name="requirements_assignee">
+                        <input type="text" class="form-control" name="requirements_assignee" id="requirements_assignee">
                     </label>
                     <label class="control-label" style="width: 100%;">Description
-                        <input type="text" class="form-control" name="requirements_description">
+                        <input type="text" class="form-control" name="requirements_description" id="requirements_description">
                     </label>
                     <label class="control-label">Status</label>
                     <label>
-                        <select style="border-radius: 5%;">
+                        <select id="requirement_status" style="border-radius: 5%;">
                             <option value="new">NEW</option>
                             <option value="inprocess">IN PROCESS</option>
                             <option value="completed">COMPLETED</option>
@@ -277,6 +278,14 @@
             });
     });    
 </script>
+
+<script src="js/jquery.js"></script>
+<script src="js/add-requirement.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/dashboard.js"></script>
+<script type="text/javascript"></script>
 </body>
 
 </html>
