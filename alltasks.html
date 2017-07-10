@@ -30,30 +30,17 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+        function MyFunction(idset){
+            var loc = "alltasks.html?"+ String(idset);
+            var set = String(idset).split("//");
+            console.log("requirement id = " + set[0] + " // task id = " + set[1]);
+            console.log(loc);
+            document.getElementById(set[1]).href = loc;
+            window.location.href=loc;
+        }
+    </script>
 
-    <!--<script type="text/javascript">-->
-        <!--$(document).ready(function(){-->
-            <!--$("#taskstimeline").click(function (e) {-->
-                <!--e.preventDefault();-->
-                <!--$("#prodetail").attr("src", $(this).attr("href"));-->
-            <!--})-->
-        <!--});-->
-    <!--</script>-->
-
-    <!-- add new task -->
-    <!--<script type="text/javascript">-->
-        <!--$(document).ready(function(){-->
-            <!--$("#add-task").click(function (e) {-->
-                <!--console.log("add task!!");-->
-                <!--var script = document.createElement("script");-->
-                <!--script.type = "text/javascript";-->
-                <!--script.src = "js/task.js";-->
-                <!--document.getElementsByTagName("head")[0].appendChild(script);-->
-                <!--return false;-->
-            <!--})-->
-        <!--})-->
-    <!--</script>-->
-    <!-- post task id -->
 </head>
 
 <body>
@@ -114,6 +101,36 @@
         </div>
     </div>
 
+    <hr><br><br>
+    <!-- detail table -->
+    <div class="col-lg-12">
+        <div class="table-responsive">
+            <h3 id="task_title"></h3>
+            <table class="table table-striped table-hover">
+                <tbody>
+                    <tr>
+                        <td>
+                            <b>Task ID</b>
+                        </td>
+                        <td id="task_id"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Status</b>
+                        </td>
+                        <td id="task_status"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Description</b>
+                        </td>
+                        <td id="task_description"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <!-- Edit/Delete Modal -->
     <div id="edit_task" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -125,33 +142,24 @@
                 </div>
                 <div class="modal-body">
                     <label class="control-label" style="width: 100%;">Task Title
-                        <input type="text" class="form-control" name="task_name">
+                        <input type="text" class="form-control" name="task_name" id="edit_task_name">
                     </label>
                     <label class="control-label" style="width: 100%;">Assignee
                         <input type="text" class="form-control" name="task_assignee">
                     </label>
-                    <!--<label class="control-label" style="width: 100%;">Followers-->
-                        <!--<input type="text" class="form-control" name="task_followers">-->
-                    <!--</label>-->
                     <label class="control-label" style="width: 100%;">Description
                         <input type="text" class="form-control" name="task_description">
                     </label>
-                    <label class="control-label" style="width: 100%;">Status
-                        <input type="text" class="form-control" name="task_status">
+                    <label class="control-label">Status</label>
+                    <label>
+                        <select id="tasks_status">
+                            <option value="new">NEW</option>
+                            <option value="inprocess">IN PROCESS</option>
+                            <option value="completed">COMPLETED</option>
+                            <option value="cancelled">CANCELLED</option>
+                            <option value="onhold">ON HOLD</option>
+                        </select>
                     </label>
-                    <!--<label class="control-label" style="width: 100%;">Due Date-->
-                        <!--<input type="text" class="form-control" name="tasks_status">-->
-                    <!--</label>-->
-                    <!--<label class="control-label">Status</label>-->
-                    <!--<label>-->
-                        <!--<select>-->
-                            <!--<option value="new">NEW</option>-->
-                            <!--<option value="inprocess">IN PROCESS</option>-->
-                            <!--<option value="completed">COMPLETED</option>-->
-                            <!--<option value="cancelled">CANCELLED</option>-->
-                            <!--<option value="onhold">ON HOLD</option>-->
-                        <!--</select>-->
-                    <!--</label>-->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="cancel btn btn-default" data-dismiss="modal">Close</button>
@@ -172,30 +180,24 @@
                 </div>
                 <div class="modal-body">
                     <label class="control-label" style="width: 100%;">Task Title
-                        <input type="text" class="form-control" name="task_name" id="add_task_name">
+                        <input type="text" class="form-control" name="add_task_name" id="add_task_name">
                     </label>
                     <label class="control-label" style="width: 100%;">Assignee
-                        <input type="text" class="form-control" name="task_assignee" id="add_task_assignee">
+                        <input type="text" class="form-control" name="add_task_assignee" id="add_task_assignee">
                     </label>
-                    <!--<label class="control-label" style="width: 100%;">Followers-->
-                        <!--<input type="text" class="form-control" name="task_followers">-->
-                    <!--</label>-->
                     <label class="control-label" style="width: 100%;">Description
-                        <input type="text" class="form-control" name="task_description" id="add_task_description" >
+                        <input type="text" class="form-control" name="add_task_description" id="add_task_description" >
                     </label>
-                    <label class="control-label" style="width: 100%;">Status
-                        <input type="text" class="form-control" name="task_status" id="add_task_status">
+                    <label class="control-label">Status</label>
+                    <label>
+                        <select style="border-radius: 5%;" id="add_task_status">
+                            <option value="New">NEW</option>
+                            <option value="In Process">IN PROCESS</option>
+                            <option value="Completed">COMPLETED</option>
+                            <option value="Cancelled">CANCELLED</option>
+                            <option value="On Hold">ON HOLD</option>
+                        </select>
                     </label>
-                    <!--<label class="control-label">Status</label>-->
-                    <!--<label>-->
-                        <!--<select style="border-radius: 5%;">-->
-                            <!--<option value="new">NEW</option>-->
-                            <!--<option value="inprocess">IN PROCESS</option>-->
-                            <!--<option value="completed">COMPLETED</option>-->
-                            <!--<option value="cancelled">CANCELLED</option>-->
-                            <!--<option value="onhold">ON HOLD</option>-->
-                        <!--</select>-->
-                    <!--</label>-->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="cancel btn btn-default" data-dismiss="modal">Close</button>
@@ -217,53 +219,75 @@
     $(document).ready(function GetUrlValue(VarSearch){
         var SearchString = String(document.URL);
         var arr = SearchString.split('?');
-        console.log("task id test = " + arr[1]);
-//        var arr = {};
-//        location.search.substr(1).split("&").forEach(function(item) {
-//            arr[item.split("=")[0]] = item.split("=")[1]
-//        });
-
-        var data = "txn=10" + "&requirement_id=" + arr[1];
+        var idset = arr[1].split("//");
+        var requirement_id = 0;
+        var task_id = 0;
+        var list_data = 0;
+        var detail_data = 0;
+        if(idset.length >= 2){
+            console.log("ajax: requirement id = " + idset[0] + "&& task id = " + idset[idset.length-1]);
+            requirement_id = idset[0];
+            task_id = idset[idset.length-1];
+            list_data = "txn=10" + "&requirement_id=" + requirement_id;
+            detail_data = "txn=15" + "&task_id=" + task_id;
+        }else {
+            console.log("ajax: requirement id = " + idset[0]);
+            requirement_id = idset[0];
+            list_data = "txn=10" + "&requirement_id=" + requirement_id;
+        }
         $.ajax({
             type: "GET",
             url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
-            data: data,
+            data: list_data,
             success: function (info) {
-                console.log(info);
-                if(info) {
+                console.log("ajax TASK list : " + info);
                     info = info.replace(/\n/gm, "");
                     info = info.replace(/}{/gm, "};{");
                     var tasks = info.split(";");
-                    console.log("tasks 1 = " + tasks[0]);
-                    console.log("length = " + tasks.length);
                     for (var i = 0; i < tasks.length; i++) {
                         console.log(i);
                         var taskJSON = JSON.parse(tasks[i]);
-                        console.log(taskJSON);
+                        console.log("ajax:" + taskJSON);
+                        var idset = arr[1] + "//" + taskJSON.task_id;
                         var task_list = "<tr>" +
-                            "<td><a href='#' class=\"t" + taskJSON.task_status + "\">" + taskJSON.task_status + "</a></td>" +
-                            "<td><a href='#'>" + taskJSON.task_name + "</a></td>" +
-                            "<td><a href='#'>" + taskJSON.task_description + "</a></td>" +
+                            "<td>" + taskJSON.task_status + "  </td>" +
+                            "<td><a href='javascript:MyFunction(\""+ idset +"\");' target='prodetail' id='"+ taskJSON.task_id+"'>" + taskJSON.task_name + "</a></td>" +
+                            "<td>" + taskJSON.task_description + "</td>" +
                             "<td align='center'>" +
                             "<a class='btn btn-default edit-task' data-toggle='modal' data-target='#edit_task'><em class='fa fa-pencil'></em></a>" +
                             "<a class='btn btn-danger'><em class='fa fa-trash'></em></a>" +
                             "</td>" +
                             "</tr>";
                         $("#tasks_data").append(task_list);
-                        }
                     }
-                else{
-                    alert("NO TASK!");
-                }
             },
             error: function (info) {
                 console.log('An error occurred!');
                 console.log(info);
             }
         });
+
+        $.ajax({
+            type: "GET",
+            url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
+            data: detail_data,
+            success: function(info){
+                console.log("ajax TASK detail : " + info);
+                var task_detail = info.replace(/\n/gm,"");
+                var taskdetailJSON = JSON.parse(task_detail);
+                $("#task_id").append(taskdetailJSON.task_id);
+                $("#task_status").append(taskdetailJSON.task_status);
+                $("#task_title").append(taskdetailJSON.task_name);
+                $("#task_description").append(taskdetailJSON.task_description);
+
+            }
+        });
     });
 </script>
 </body>
+
+
+
 
 </html>
 
