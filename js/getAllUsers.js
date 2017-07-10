@@ -12,10 +12,10 @@
 	                listlen = memberlist.length;
 	                console.log(listlen);
 	                console.log(memberlist);
-	                $("ul").empty();
+	                $("#member-dropdown-options").empty();
 	                for (var i = 0; i < listlen; i++) {
 	                    memJSON = JSON.parse(memberlist[i]);
-	                    var meminfo = "<li><a href='#'>"+ memJSON.user_name +"</a></li>"
+	                    var meminfo = "<li id=\""+ memJSON.user_name +"\"><a href='#'>"+ memJSON.user_name +"</a></li>"
 	                    $("#member-dropdown-options").append(meminfo);
 
 	                }
