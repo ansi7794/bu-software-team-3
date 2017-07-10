@@ -30,7 +30,9 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
     <!-- task list -->
+
     <script>
         $('.nav-tabs-dropdown').each(function(i, elm) {
 
@@ -102,6 +104,7 @@
                 e.preventDefault();
                 $("#prodetail").attr("src", $(this).attr("href"));
             })
+
         });
     </script>
 </head>
@@ -167,9 +170,15 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <li class=\"button-dropdown\"><a href=\"javascript:void(0)\" class=\"dropdown-toggle\">Member <span>▼</span></a>
-                                                <ul class=\"dropdown-menu\"><li><a href=\"#\">Drop Item 1</a></li></ul>
-                                            </li>
+                                           <div class="dropdown">
+                                                <button class="btn btn-primary dropdown-toggle" id="members-dropdown" type="button" data-toggle="dropdown" href="#">Assign Members to Project
+                                                    <span class="caret"></span></button>
+                                                        <ul class="dropdown-menu" id="dropdown-options">
+                                                          <li><a href="#">tiannaliu</a></li>
+                                                          <li><a href="#">Member 2</a></li>
+                                                          <li><a href="#">Member 3</a></li>
+                                                        </ul>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -241,6 +250,8 @@
 <script src="js/jquery.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
+<script src="js/add-members.js"></script>
+<script src="js/getAllUsers.js"></script>
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/dashboard.js"></script>
@@ -275,6 +286,7 @@
         });
     });
 </script>
+
 </body>
 </html>
 
