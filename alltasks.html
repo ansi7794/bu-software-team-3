@@ -19,7 +19,6 @@
 
     <!-- Custom CSS -->
     <link href="css/modern-business.css" rel="stylesheet">
-    <link href="css/dialog.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -31,16 +30,14 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript">
-        function MyFunction(idset){
-            var loc = "alltasks.html?"+ String(idset);
-            var set = String(idset).split("//");
-            console.log("requirement id = " + set[0] + " // task id = " + set[1]);
-            console.log(loc);
+        function MyFunction(idarr){
+            var loc = "alltasks.html?"+ String(idarr);
+            var set = String(idarr).split("//");
+            console.log("url = " + loc);
             document.getElementById(set[1]).href = loc;
             window.location.href=loc;
         }
     </script>
-
 </head>
 
 <body>
@@ -102,6 +99,7 @@
     </div>
 
     <hr><br><br>
+
     <!-- detail table -->
     <div class="col-lg-12">
         <div class="table-responsive">
@@ -224,10 +222,11 @@
         var task_id = 0;
         var list_data = 0;
         var detail_data = 0;
-        if(idset.length >= 2){
-            console.log("ajax: requirement id = " + idset[0] + "&& task id = " + idset[idset.length-1]);
+        if(idset.length === 2){
+            console.log("url length")
+            console.log("ajax: requirement id = " + idset[0] + " && task id = " + idset[1]);
             requirement_id = idset[0];
-            task_id = idset[idset.length-1];
+            task_id = idset[1];
             list_data = "txn=10" + "&requirement_id=" + requirement_id;
             detail_data = "txn=15" + "&task_id=" + task_id;
         }else {
@@ -241,32 +240,31 @@
             data: list_data,
             success: function (info) {
                 console.log("ajax TASK list : " + info);
-                    info = info.replace(/\n/gm, "");
-                    info = info.replace(/}{/gm, "};{");
-                    var tasks = info.split(";");
-                    for (var i = 0; i < tasks.length; i++) {
-                        console.log(i);
-                        var taskJSON = JSON.parse(tasks[i]);
-                        console.log("ajax:" + taskJSON);
-                        var idset = arr[1] + "//" + taskJSON.task_id;
-                        var task_list = "<tr>" +
-                            "<td>" + taskJSON.task_status + "  </td>" +
-                            "<td><a href='javascript:MyFunction(\""+ idset +"\");' target='prodetail' id='"+ taskJSON.task_id+"'>" + taskJSON.task_name + "</a></td>" +
-                            "<td>" + taskJSON.task_description + "</td>" +
-                            "<td align='center'>" +
-                            "<a class='btn btn-default edit-task' data-toggle='modal' data-target='#edit_task'><em class='fa fa-pencil'></em></a>" +
-                            "<a class='btn btn-danger'><em class='fa fa-trash'></em></a>" +
-                            "</td>" +
-                            "</tr>";
-                        $("#tasks_data").append(task_list);
-                    }
+                info = info.replace(/\n/gm, "");
+                info = info.replace(/}{/gm, "};{");
+                var tasks = info.split(";");
+                for (var i = 0; i < tasks.length; i++) {
+                    console.log(i);
+                    var taskJSON = JSON.parse(tasks[i]);
+                    console.log("ajax:" + taskJSON);
+                    var idarr = idset[0]+ "//" + taskJSON.task_id;
+                    var task_list = "<tr>" +
+                        "<td>" + taskJSON.task_status + " </td>" +
+                        "<td><a href='javascript:MyFunction(\""+ idarr +"\");' target='prodetail' id='"+ taskJSON.task_id+"'>" + taskJSON.task_name + "</a></td>" +
+                        "<td>" + taskJSON.task_description + "</td>" +
+                        "<td align='center'>" +
+                        "<a class='btn btn-default edit-task' data-toggle='modal' data-target='#edit_task'><em class='fa fa-pencil'></em></a>" +
+                        "<a class='btn btn-danger'><em class='fa fa-trash'></em></a>" +
+                        "</td>" +
+                        "</tr>";
+                    $("#tasks_data").append(task_list);
+                }
             },
             error: function (info) {
                 console.log('An error occurred!');
                 console.log(info);
             }
         });
-
         $.ajax({
             type: "GET",
             url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
@@ -279,7 +277,6 @@
                 $("#task_status").append(taskdetailJSON.task_status);
                 $("#task_title").append(taskdetailJSON.task_name);
                 $("#task_description").append(taskdetailJSON.task_description);
-
             }
         });
     });
