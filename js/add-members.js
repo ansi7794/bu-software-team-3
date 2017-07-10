@@ -1,6 +1,6 @@
- $('#dropdown-options li').on({
+ $('#member-dropdown-options li').on({
 	"click":function(e){
-	    alert("trying something else");
+	    alert("trying txn 7");
 	    
 	    var SearchString = String(document.URL);
 	    var arr = SearchString.split('?');

@@ -1,18 +1,24 @@
  $('#members-dropdown').on({
 	"click":function(e){
-	    alert("trying something else");
-
 	    var data = "txn=24";
 		$.ajax({
 		    type: "GET",
 		    url:  "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
 		    data: data,
 		    success: function (info) {
-		            console.log(info);
-		            var userlist = JSON.parse(info);
-		            console.log(userlist);
-		          
-		            console.log("inside ajax call");
+		            members = info.replace(/\n/gm," ").split(" ");
+	                memberlist = members.filter(function(v){if(v.startsWith("{")) {return v.endsWith("}")} else{return false}});
+	                console.log("testing success");
+	                listlen = memberlist.length;
+	                console.log(listlen);
+	                console.log(memberlist);
+	                $("ul").empty();
+	                for (var i = 0; i < listlen; i++) {
+	                    memJSON = JSON.parse(memberlist[i]);
+	                    var meminfo = "<li><a href='#'>"+ memJSON.user_name +"</a></li>"
+	                    $("#member-dropdown-options").append(meminfo);
+
+	                }
 		            //window.location.href=window.location.href;
 		        },
 
