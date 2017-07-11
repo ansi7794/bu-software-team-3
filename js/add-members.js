@@ -5,7 +5,7 @@
 	    var SearchString = String(document.URL);
 	    var arr = SearchString.split('?');
   		var project_id = arr[1]
-	    var user_name = $(this).text().trim();
+	    var user_name = $(this).attr('id');
 
 	    var data = "txn=7&project_id="+ project_id + "&user_name="+ user_name;
 	    console.log("PROJECT_ID: " + project_id);
@@ -19,7 +19,7 @@
 		            var requirement = info.replace(/\n/gm,"");
 		            var detailsJSON = JSON.parse(requirement);
 		            console.log("inside ajax call");
-		            //window.location.href=window.location.href;
+		            window.location.href=window.location.href;
 		        },
 
 		    error: function (info) {
