@@ -1,9 +1,8 @@
- $('#member-dropdown-options').on("click","li", function(){
-    alert("trying txn 7");
-    
+ $('#member-dropdown-options').on("click","li", function(event){
+ 	event.preventDefault();
     var SearchString = String(document.URL);
     var arr = SearchString.split('?');
-		var project_id = arr[1]
+	var project_id = arr[1];
     var user_name = $(this).attr('id');
 
     var data = "txn=7&project_id="+ project_id + "&user_name="+ user_name;
@@ -17,8 +16,8 @@
 	            console.log(info);
 	            var requirement = info.replace(/\n/gm,"");
 	            var detailsJSON = JSON.parse(requirement);
-	            console.log("inside ajax call");
 	            window.location.reload();
+	            console.log("inside ajax call");
 	        },
 
 	    error: function (info) {
