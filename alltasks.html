@@ -29,12 +29,101 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script>
+        $('.nav-tabs-dropdown').each(function(i, elm) {
+
+            $(elm).text($(elm).next('ul').find('li.active a').text());
+
+        });
+
+        $('.nav-tabs-dropdown').on('click', function(e) {
+
+            e.preventDefault();
+
+            $(e.target).toggleClass('open').next('ul').slideToggle();
+
+        });
+
+        $('#nav-tabs-wrapper a[data-toggle="tab"]').on('click', function(e) {
+
+            e.preventDefault();
+
+            $(e.target).closest('ul').hide().prev('a').removeClass('open').text($(this).text());
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function (e) {
+            function t(t) {
+                e(t).bind("click", function (t) {
+                    t.preventDefault();
+                    e(this).parent().fadeOut()
+                })
+            }
+            e(".dropdown-toggle").click(function () {
+                var t = e(this).parents(".button-dropdown").children(".dropdown-menu").is(":hidden");
+                e(".button-dropdown .dropdown-menu").hide();
+                e(".button-dropdown .dropdown-toggle").removeClass("active");
+                if (t) {
+                    e(this).parents(".button-dropdown").children(".dropdown-menu").toggle().parents(".button-dropdown").children(".dropdown-toggle").addClass("active")
+                }
+            });
+            e(document).bind("click", function (t) {
+                var n = e(t.target);
+                if (!n.parents().hasClass("button-dropdown")) e(".button-dropdown .dropdown-menu").hide();
+            });
+            e(document).bind("click", function (t) {
+                var n = e(t.target);
+                if (!n.parents().hasClass("button-dropdown")) e(".button-dropdown .dropdown-toggle").removeClass("active");
+            })
+        });
+    </script>
+
+
     <script type="text/javascript">
         function MyFunction(idarr){
             var loc = "alltasks.html?"+ String(idarr);
-            var set = String(idarr).split("//");
+            var set = String(idarr).split("&&&");
             console.log("url = " + loc);
             document.getElementById(set[1]).href = loc;
+            window.location.href=loc;
+        }
+
+        function editTask(idarr){
+            var loc = "alltasks.html?"+ String(idarr);
+            var set = String(idarr).split("&&&");
+            console.log("edit url = " + loc);
+            console.log("task id = " + set[1]);
+            var task_id = set[1];
+            var requirement_id = set[0];
+
+            var task_name = document.getElementById("")
+
+            document.getElementById(set[1]).href = loc;
+            window.location.href=loc;
+        }
+
+        function deleteTask(idarr){
+            var loc = "alltasks.html?"+ String(idarr);
+            var set = String(idarr).split("&&&");
+            console.log("url = " + loc);
+            console.log("set = " + set[0] + " ++ " + set[1]);
+            var delete_data = "txn=21" + "&task_id=" + set[1];
+            $.ajax({
+                type: "GET",
+                url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
+                data: delete_data,
+                success: function(info){
+                    console.log("delete TASK successfully!");
+                },
+                error: function (info) {
+                    console.log('An error occurred in deleting TASK!');
+                    console.log(info);
+                }
+            });
+
+            document.getElementById("delete_task").href = loc;
             window.location.href=loc;
         }
     </script>
@@ -67,14 +156,7 @@
                 <div class="col-md-5">
                     <div class="header-rightside">
                         <ul class="list-inline header-top pull-right">
-                            <li class="hidden-xs"><a href="#" class="add-task" data-toggle="modal" data-target="#add_task">Add Task</a></li>
-                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-                            <li>
-                                <a href="#" class="icon-info">
-                                    <i class="fa fa-bell" aria-hidden="true"></i>
-                                    <span class="label label-primary">3</span>
-                                </a>
-                            </li>
+                            <li class="hidden-xs"><a href="#" class="add-task" data-toggle="modal" data-target="#add_task">New Task</a></li>
                         </ul>
                     </div>
                 </div>
@@ -87,6 +169,7 @@
                 <thead>
                 <tr>
                     <th><h4 class="sortstatus">Status</h4></th>
+                    <th><h4>Due Date</h4></th>
                     <th><h4>Title</h4></th>
                     <th><h4>Description</h4></th>
                     <th></th>
@@ -103,7 +186,7 @@
     <!-- detail table -->
     <div class="col-lg-12">
         <div class="table-responsive">
-            <h3 id="task_title"></h3>
+            <h3 id="task_name"></h3>
             <table class="table table-striped table-hover">
                 <tbody>
                     <tr>
@@ -116,6 +199,7 @@
                         <td>
                             <b>Status</b>
                         </td>
+                        <!--<td id="task_status"></td>-->
                         <td id="task_status"></td>
                     </tr>
                     <tr>
@@ -123,6 +207,31 @@
                             <b>Description</b>
                         </td>
                         <td id="task_description"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Creator</b>
+                        </td>
+                        <td id="task_creator"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Due Date</b>
+                        </td>
+                        <td id="task_due"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                           <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" id="memtask-dropdown" type="button" data-toggle="dropdown">Assign Members to Task
+                                    <span class="caret"></span></button>
+                                        <ul class="dropdown-menu" id="memtask-dropdown-options">
+                                        </ul>
+                            </div>
+                        </td>
+                        <td>
+                           <ul id="promemtask"></ul>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -140,28 +249,34 @@
                 </div>
                 <div class="modal-body">
                     <label class="control-label" style="width: 100%;">Task Title
-                        <input type="text" class="form-control" name="task_name" id="edit_task_name">
+                        <input type="text" class="form-control" name="edit_task_name" id="edit_task_name" readonly>
                     </label>
-                    <label class="control-label" style="width: 100%;">Assignee
-                        <input type="text" class="form-control" name="task_assignee">
+                    <label class="control-label" style="width: 100%;">Creator
+                        <input type="text" class="form-control" name="edit_task_creator" id="edit_task_creator" readonly>
                     </label>
                     <label class="control-label" style="width: 100%;">Description
-                        <input type="text" class="form-control" name="task_description">
+                        <input type="text" class="form-control" name="edit_task_description" id="edit_task_description">
                     </label>
                     <label class="control-label">Status</label>
                     <label>
-                        <select id="tasks_status">
-                            <option value="new">NEW</option>
-                            <option value="inprocess">IN PROCESS</option>
-                            <option value="completed">COMPLETED</option>
-                            <option value="cancelled">CANCELLED</option>
-                            <option value="onhold">ON HOLD</option>
+                        <select id="edit_task_status">
+                            <option value="NEW">NEW</option>
+                            <option value="IN PROCESS">IN PROCESS</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                            <option value="CANCELLED">CANCELLED</option>
+                            <option value="ON HOLD">ON HOLD</option>
                         </select>
-                    </label>
+                    </label><br>
+                    <label class="control-label" style="...">Due Date</label>
+                    <label><input type="text" class="form-control" name="edit_task_due" id="edit_task_due"></label>
+                    <!--<label class="control-label" style="...">Due Date</label>-->
+                    <!--<label>-->
+                        <!--<input type="date" id="edit_task_due" value="2017-07-10" >-->
+                    <!--</label>-->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="cancel btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                    <button type="button" id="edit-task" class="btn btn-primary" data-dismiss="modal">Save</button>
                 </div>
             </div>
         </div>
@@ -180,26 +295,32 @@
                     <label class="control-label" style="width: 100%;">Task Title
                         <input type="text" class="form-control" name="add_task_name" id="add_task_name">
                     </label>
-                    <label class="control-label" style="width: 100%;">Assignee
-                        <input type="text" class="form-control" name="add_task_assignee" id="add_task_assignee">
+                    <label class="control-label" style="width: 100%;">Creator
+                        <input type="text" class="form-control" name="add_task_creator" id="add_task_creator">
                     </label>
                     <label class="control-label" style="width: 100%;">Description
                         <input type="text" class="form-control" name="add_task_description" id="add_task_description" >
                     </label>
-                    <label class="control-label">Status</label>
+                    <!--<label class="control-label" style="...">Due Date(MM-DD-YYYY)</label>-->
+                    <!--<label><input type="text" class="form-control" name="add_task_due" id="add_task_due"></label>-->
+                    <label class="control-label" style="...">Status</label>
                     <label>
                         <select style="border-radius: 5%;" id="add_task_status">
-                            <option value="New">NEW</option>
-                            <option value="In Process">IN PROCESS</option>
-                            <option value="Completed">COMPLETED</option>
-                            <option value="Cancelled">CANCELLED</option>
-                            <option value="On Hold">ON HOLD</option>
+                            <option value="NEW">NEW</option>
+                            <option value="IN PROCESS">IN PROCESS</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                            <option value="CANCELLED">CANCELLED</option>
+                            <option value="ON HOLD">ON HOLD</option>
                         </select>
+                    </label>
+                    <label class="control-label" style="...">Due Date</label>
+                    <label>
+                        <input type="date" id="add_task_due" value="2017-07-10" >
                     </label>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="cancel btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" id="add-task1" class="btn btn-primary" data-dismiss="modal">Save</button>
+                    <button type="button" id="add-task" class="btn btn-primary" data-dismiss="modal">Save</button>
                 </div>
             </div>
         </div>
@@ -209,6 +330,9 @@
 <script src="js/jquery.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
+<script src="js/add-memtask.js"></script>
+<script src="js/allmemreq.js"></script>
+<script src="js/memtask.js"></script>
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/dashboard.js"></script>
@@ -217,13 +341,12 @@
     $(document).ready(function GetUrlValue(VarSearch){
         var SearchString = String(document.URL);
         var arr = SearchString.split('?');
-        var idset = arr[1].split("//");
-        var requirement_id = 0;
-        var task_id = 0;
-        var list_data = 0;
-        var detail_data = 0;
+        var idset = arr[1].split("&&&");
+        var requirement_id;
+        var task_id;
+        var list_data;
+        var detail_data;
         if(idset.length === 2){
-            console.log("url length")
             console.log("ajax: requirement id = " + idset[0] + " && task id = " + idset[1]);
             requirement_id = idset[0];
             task_id = idset[1];
@@ -247,24 +370,27 @@
                     console.log(i);
                     var taskJSON = JSON.parse(tasks[i]);
                     console.log("ajax:" + taskJSON);
-                    var idarr = idset[0]+ "//" + taskJSON.task_id;
+                    var idarr = idset[0]+ "&&&" + taskJSON.task_id;
                     var task_list = "<tr>" +
-                        "<td>" + taskJSON.task_status + " </td>" +
+                        "<td>" + taskJSON.task_status + "</td>" +
+                        "<td>" + taskJSON.task_due_date + "</td>" +
                         "<td><a href='javascript:MyFunction(\""+ idarr +"\");' target='prodetail' id='"+ taskJSON.task_id+"'>" + taskJSON.task_name + "</a></td>" +
                         "<td>" + taskJSON.task_description + "</td>" +
                         "<td align='center'>" +
-                        "<a class='btn btn-default edit-task' data-toggle='modal' data-target='#edit_task'><em class='fa fa-pencil'></em></a>" +
-                        "<a class='btn btn-danger'><em class='fa fa-trash'></em></a>" +
+                        "<a href='javascript:editTask(\"" + idarr + "\");' class='btn btn-default edit-task' data-toggle='modal' data-target='#edit_task'><em class='fa fa-pencil'></em></a>" +
+                        "<a href='javascript:deleteTask(\"" + idarr + "\");' class='btn btn-danger' id='delete_task'><em class='fa fa-trash'></em></a>" +
                         "</td>" +
                         "</tr>";
                     $("#tasks_data").append(task_list);
                 }
             },
             error: function (info) {
-                console.log('An error occurred!');
+                console.log('An error occurred in TASK list table!');
                 console.log(info);
             }
         });
+
+//        display detail table
         $.ajax({
             type: "GET",
             url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
@@ -275,8 +401,15 @@
                 var taskdetailJSON = JSON.parse(task_detail);
                 $("#task_id").append(taskdetailJSON.task_id);
                 $("#task_status").append(taskdetailJSON.task_status);
-                $("#task_title").append(taskdetailJSON.task_name);
+                $("#task_name").append(taskdetailJSON.task_name);
                 $("#task_description").append(taskdetailJSON.task_description);
+                $("#task_creator").append(taskdetailJSON.task_creator);
+                $("#task_due").append(taskdetailJSON.task_due_date);
+            },
+
+            error: function (info) {
+                console.log('An error occurred in TASK detail table!');
+                console.log(info);
             }
         });
     });
