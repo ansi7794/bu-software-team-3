@@ -18,7 +18,6 @@
 
     <!-- Custom CSS -->
     <link href="css/modern-business.css" rel="stylesheet">
-    <link href="css/dialog.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -29,29 +28,6 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-        $('.nav-tabs-dropdown').each(function(i, elm) {
-
-            $(elm).text($(elm).next('ul').find('li.active a').text());
-
-        });
-
-        $('.nav-tabs-dropdown').on('click', function(e) {
-
-            e.preventDefault();
-
-            $(e.target).toggleClass('open').next('ul').slideToggle();
-
-        });
-
-        $('#nav-tabs-wrapper a[data-toggle="tab"]').on('click', function(e) {
-
-            e.preventDefault();
-
-            $(e.target).closest('ul').hide().prev('a').removeClass('open').text($(this).text());
-
-        });
-    </script>
 
     <script>
         $(document).ready(function (e) {
@@ -87,15 +63,19 @@
             document.getElementById('requirement2').href = loc;
             window.location.href=loc;
         }
+    </script>
 
+    <script type="text/javascript">
         function detailTable(idarr){
             var loc = "requirements.html?"+ String(idarr);
-            var set = String(idarr).split("//");
+            var set = String(idarr).split("&&&");
             console.log("url = " + loc);
             document.getElementById(set[1]).href = loc;
             window.location.href=loc;
         }
+    </script>
 
+    <script type="text/javascript">
         function deleteReq(idarr){
             var loc = "requirements.html?"+ String(idarr);
             var set = String(idarr).split("&&&");
@@ -107,15 +87,46 @@
                 url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
                 data: delete_data,
                 success: function(info){
-                    console.log("delete TASK successfully!");
+                    console.log("delete Req successfully!");
                 },
                 error: function (info) {
-                    console.log('An error occurred in deleting TASK!');
+                    console.log('An error occurred in deleting Req!');
                     console.log(info);
                 }
             });
             document.getElementById("delete_req").href = loc;
             window.location.href=loc;
+        }
+    </script>
+
+    <script type="text/javascript">
+        function editReq(idarr){
+            console.log("inedit");
+            var ids = String(idarr).split("&&&");
+            console.log("set = " + ids[0] + " ++ " + ids[1]);
+            var requirement_id = ids[1];
+            var detail_data = "txn=8" + "&requirement_id=" + requirement_id;
+            console.log(detail_data);
+            $.ajax({
+                type: "GET",
+                url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
+                data: detail_data,
+                success: function(info){
+                    console.log("ajax Req detail : " + info);
+                    var requirement_detail = info.replace(/\n/gm,"");
+                    var requirementdetailJSON = JSON.parse(requirement_detail);
+                    $("#edit_requirement_status").val(requirementdetailJSON.requirement_status);
+                    $("#edit_requirement_name").val(requirementdetailJSON.requirement_title);
+                    $("#edit_requirement_description").val(requirementdetailJSON.requirement_description);
+                    $("#edit_requirement_creator").val(requirementdetailJSON.project_creator);
+                    $("#edit_requirement_id").val(requirement_id);
+                },
+
+                error: function (info) {
+                    console.log('An error occurred in Req update!');
+                    console.log(info);
+                }
+            });
         }
     </script>
 </head>
@@ -176,7 +187,7 @@
     <!-- detail table -->
     <div class="col-lg-12">
         <div class="table-responsive">
-            <h3 id="the_requirement_title"></h3>
+            <h3 id="the_requirement_name"></h3>
             <table class="table table-striped table-hover">
                 <tbody>
                 <tr>
@@ -223,8 +234,9 @@
                     <h4 class="modal-title">Update requirements</h4>
                 </div>
                 <div class="modal-body">
+                    <input type="hidden" class="form-control" name="requirement_id" id="edit_requirement_id" readonly>
                     <label class="control-label" style="width: 100%;">Requirements Title
-                        <input type="text" class="form-control" name="requirement_title" id="edit_requirement_name">
+                        <input type="text" class="form-control" name="requirement_name" id="edit_requirement_name">
                     </label>
                     <label class="control-label" style="width: 100%;">Creator
                         <input type="text" class="form-control" name="requirement_creator" id="edit_requirement_creator">
@@ -262,13 +274,13 @@
                 </div>
                 <div class="modal-body">
                     <label class="control-label" style="width: 100%;">Requirements Title
-                        <input type="text" class="form-control" name="requirements_title" id="add_requirement_title">
+                        <input type="text" class="form-control" name="add_requirement_name" id="add_requirement_name">
                     </label>
                     <label class="control-label" style="width: 100%;">Creator
-                        <input type="text" class="form-control" name="requirements_assignee" id="add_requirement_creator">
+                        <input type="text" class="form-control" name="add_requirement_creator" id="add_requirement_creator">
                     </label>
                     <label class="control-label" style="width: 100%;">Description
-                        <input type="text" class="form-control" name="requirements_description" id="add_requirement_description">
+                        <input type="text" class="form-control" name="add_requirement_description" id="add_requirement_description">
                     </label>
                     <label class="control-label">Status</label>
                     <label>
@@ -297,6 +309,7 @@
 <script src="js/memreq.js"></script>
 <script src="js/allmembers.js"></script>
 <script src="js/add-requirement.js"></script>
+<script src="js/edit_requirement.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/dashboard.js"></script>
 
@@ -304,7 +317,7 @@
      $(document).ready(function GetUrlValue(VarSearch){
         var SearchString = String(document.URL);
         var arr  = SearchString.split('?');
-        var idset = arr[1].split("//");
+        var idset = arr[1].split("&&&");
         var project_id = 0;
         var requirement_id = 0;
         var list_data = 0;
@@ -334,22 +347,17 @@
                     console.log("ARRAY LENGTH = " + arr.length);
                     for(var i = 0; i<arr.length; i++){
                         var parsedJSON = JSON.parse(arr[i]);
-                        var idarr = idset[0]+ "//" + parsedJSON.requirement_id;
+                        var idarr = idset[0]+ "&&&" + parsedJSON.requirement_id;
                         console.log(parsedJSON);
                         var htmlStatus = "<tr><td>" + parsedJSON.requirement_status + "</td>";
 
-                        var htmlTitle = "<td><a href='javascript:detailTable(\""+ idarr +"\");' target='prodetail' id='" + parsedJSON.requirement_id +"'>" +
-                            parsedJSON.requirement_title +
-                            "</a></td>";
+                        var htmlTitle = "<td><a href='javascript:detailTable(\""+ idarr +"\");' target='prodetail' id='" + parsedJSON.requirement_id +"'>" + parsedJSON.requirement_title + "</a></td>";
 
                         var htmlDescription = "<td>" + parsedJSON.requirement_description + "</td>";
 
-                        var htmlEditButton = "<td><a class=\"btn btn-default edit-issue\" data-toggle=\"modal\" data-target=\"#edit_requirements\"><em class=\"fa fa-pencil\"></em></a></td>";
+                        var htmlEditButton = "<td><button onclick='editReq(\"" + idarr + "\");' class='btn btn-default edit-requirement' data-toggle=\"modal\" data-target=\"#edit_requirements\"><em class=\"fa fa-pencil\"></em></button></td>";
 
-
-                        var htmlTrashButton = "<td><a href=\"javascript:deleteReq(\'" +
-                            idarr +
-                            "\');\"  class=\"btn btn-danger\"><em class=\"fa fa-trash\"></em></a></td>";
+                        var htmlTrashButton = "<td><a href='javascript:deleteReq(\"" + idarr + "\");' class='btn btn-danger' id='delete_req'><em class=\"fa fa-trash\"></em></a></td>";
 
                         var htmlTaskButton = "<td><a href=\"javascript:MyFunction(\'" +
                             parsedJSON.requirement_id +
@@ -379,7 +387,7 @@
                  var requirementdetailJSON = JSON.parse(requirement_detail);
                  $("#the_requirement_id").append(requirementdetailJSON.requirement_id);
                  $("#the_requirement_status").append(requirementdetailJSON.requirement_status);
-                 $("#the_requirement_title").append(requirementdetailJSON.requirement_title);
+                 $("#the_requirement_name").append(requirementdetailJSON.requirement_title);
                  $("#the_requirement_description").append(requirementdetailJSON.requirement_description);
              }
          });
