@@ -91,17 +91,30 @@
         }
 
         function editTask(idarr){
-            var loc = "alltasks.html?"+ String(idarr);
             var set = String(idarr).split("&&&");
-            console.log("edit url = " + loc);
-            console.log("task id = " + set[1]);
+            console.log("set = " + set[0] + " ++ " + set[1]);
             var task_id = set[1];
-            var requirement_id = set[0];
+            var detail_data = "txn=15" + "&task_id=" + task_id;
+            $.ajax({
+                type: "GET",
+                url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
+                data: detail_data,
+                success: function(info){
+                    console.log("ajax TASK detail : " + info);
+                    var task_detail = info.replace(/\n/gm,"");
+                    var taskdetailJSON = JSON.parse(task_detail);
+                    $("#edit_task_status").append(taskdetailJSON.task_status);
+                    $("#edit_task_name").append(taskdetailJSON.task_name);
+                    $("#edit_task_description").append(taskdetailJSON.task_description);
+                    $("#edit_task_creator").append(taskdetailJSON.task_creator);
+                    $("#edit_task_due").append(taskdetailJSON.task_due_date);
+                },
 
-            var task_name = document.getElementById("")
-
-            document.getElementById(set[1]).href = loc;
-            window.location.href=loc;
+                error: function (info) {
+                    console.log('An error occurred in TASK detail table!');
+                    console.log(info);
+                }
+            });
         }
 
         function deleteTask(idarr){
@@ -224,9 +237,9 @@
                         <td>
                            <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" id="memtask-dropdown" type="button" data-toggle="dropdown">Assign Members to Task
-                                    <span class="caret"></span></button>
-                                        <ul class="dropdown-menu" id="memtask-dropdown-options">
-                                        </ul>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" id="memtask-dropdown-options"></ul>
                             </div>
                         </td>
                         <td>
@@ -337,6 +350,7 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/dashboard.js"></script>
 <script src="js/task.js"></script>
+<script src="js/edit_task.js"></script>
 <script type="text/javascript">
     $(document).ready(function GetUrlValue(VarSearch){
         var SearchString = String(document.URL);
@@ -377,7 +391,7 @@
                         "<td><a href='javascript:MyFunction(\""+ idarr +"\");' target='prodetail' id='"+ taskJSON.task_id+"'>" + taskJSON.task_name + "</a></td>" +
                         "<td>" + taskJSON.task_description + "</td>" +
                         "<td align='center'>" +
-                        "<a href='javascript:editTask(\"" + idarr + "\");' class='btn btn-default edit-task' data-toggle='modal' data-target='#edit_task'><em class='fa fa-pencil'></em></a>" +
+                        "<button onclick='editTask(\"" + idarr + "\");' class='btn btn-default edit-task' data-toggle='modal' data-target='#edit_task'><em class='fa fa-pencil'></em></button>" +
                         "<a href='javascript:deleteTask(\"" + idarr + "\");' class='btn btn-danger' id='delete_task'><em class='fa fa-trash'></em></a>" +
                         "</td>" +
                         "</tr>";
