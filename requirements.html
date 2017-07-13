@@ -87,13 +87,34 @@
             document.getElementById('requirement2').href = loc;
             window.location.href=loc;
         }
-    </script>
-    <script type="text/javascript">
+
         function detailTable(idarr){
             var loc = "requirements.html?"+ String(idarr);
             var set = String(idarr).split("//");
             console.log("url = " + loc);
             document.getElementById(set[1]).href = loc;
+            window.location.href=loc;
+        }
+
+        function deleteReq(idarr){
+            var loc = "requirements.html?"+ String(idarr);
+            var set = String(idarr).split("&&&");
+            console.log("url = " + loc);
+            console.log("project id = " + set[0] + " // requirement id =  " + set[1]);
+            var delete_data = "txn=19" + "&requirement_id=" + set[1];
+            $.ajax({
+                type: "GET",
+                url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
+                data: delete_data,
+                success: function(info){
+                    console.log("delete TASK successfully!");
+                },
+                error: function (info) {
+                    console.log('An error occurred in deleting TASK!');
+                    console.log(info);
+                }
+            });
+            document.getElementById("delete_req").href = loc;
             window.location.href=loc;
         }
     </script>
@@ -203,22 +224,22 @@
                 </div>
                 <div class="modal-body">
                     <label class="control-label" style="width: 100%;">Requirements Title
-                        <input type="text" class="form-control" name="requirement_title" id="edit_requirement_title">
+                        <input type="text" class="form-control" name="requirement_title" id="edit_requirement_name">
                     </label>
-                    <label class="control-label" style="width: 100%;">Assignee
-                        <input type="text" class="form-control" name="requirement_assignee" id="edit_requirement_assignee">
+                    <label class="control-label" style="width: 100%;">Creator
+                        <input type="text" class="form-control" name="requirement_creator" id="edit_requirement_creator">
                     </label>
                     <label class="control-label" style="width: 100%;">Description
                         <input type="text" class="form-control" name="requirement_description" id="edit_requirement_description">
                     </label>
                     <label class="control-label">Status</label>
                     <label>
-                        <select id="requirement_status">
-                            <option value="new">NEW</option>
-                            <option value="inprocess">IN PROCESS</option>
-                            <option value="completed">COMPLETED</option>
-                            <option value="cancelled">CANCELLED</option>
-                            <option value="onhold">ON HOLD</option>
+                        <select id="edit_requirement_status">
+                            <option value="NEW">NEW</option>
+                            <option value="IN PROCESS">IN PROCESS</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                            <option value="CANCELLED">CANCELLED</option>
+                            <option value="ON HOLD">ON HOLD</option>
                         </select>
                     </label>
                 </div>
@@ -243,8 +264,8 @@
                     <label class="control-label" style="width: 100%;">Requirements Title
                         <input type="text" class="form-control" name="requirements_title" id="add_requirement_title">
                     </label>
-                    <label class="control-label" style="width: 100%;">Assignee
-                        <input type="text" class="form-control" name="requirements_assignee" id="add_requirement_assignee">
+                    <label class="control-label" style="width: 100%;">Creator
+                        <input type="text" class="form-control" name="requirements_assignee" id="add_requirement_creator">
                     </label>
                     <label class="control-label" style="width: 100%;">Description
                         <input type="text" class="form-control" name="requirements_description" id="add_requirement_description">
@@ -252,11 +273,11 @@
                     <label class="control-label">Status</label>
                     <label>
                         <select id="add_requirement_status" style="border-radius: 5%;">
-                            <option value="new">NEW</option>
-                            <option value="inprocess">IN PROCESS</option>
-                            <option value="completed">COMPLETED</option>
-                            <option value="cancelled">CANCELLED</option>
-                            <option value="onhold">ON HOLD</option>
+                            <option value="NEW">NEW</option>
+                            <option value="IN PROCESS">IN PROCESS</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                            <option value="CANCELLED">CANCELLED</option>
+                            <option value="ON HOLD">ON HOLD</option>
                         </select>
                     </label>
                 </div>
@@ -326,7 +347,9 @@
                         var htmlEditButton = "<td><a class=\"btn btn-default edit-issue\" data-toggle=\"modal\" data-target=\"#edit_requirements\"><em class=\"fa fa-pencil\"></em></a></td>";
 
 
-                        var htmlTrashButton = "<td><a class=\"btn btn-danger\"><em class=\"fa fa-trash\"></em></a></td>";
+                        var htmlTrashButton = "<td><a href=\"javascript:deleteReq(\'" +
+                            idarr +
+                            "\');\"  class=\"btn btn-danger\"><em class=\"fa fa-trash\"></em></a></td>";
 
                         var htmlTaskButton = "<td><a href=\"javascript:MyFunction(\'" +
                             parsedJSON.requirement_id +
@@ -358,7 +381,6 @@
                  $("#the_requirement_status").append(requirementdetailJSON.requirement_status);
                  $("#the_requirement_title").append(requirementdetailJSON.requirement_title);
                  $("#the_requirement_description").append(requirementdetailJSON.requirement_description);
-
              }
          });
     });    
