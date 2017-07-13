@@ -1,10 +1,11 @@
 $("#edit-task").click(function (event) {
+    console.log("inside edit js");
     var SearchString = String(document.URL);
     var arr = SearchString.split('?');
     console.log("arr = " + arr);
     var idset = arr[1].split('&&&');
     var requirement_id = idset[0];
-    var task_id = idset[1];
+    var task_id = $("#edit_task_id").val();
     task_name = $('#edit_task_name').val();
     task_status = $('#edit_task_status').val();
     task_description = $('#edit_task_description').val();
