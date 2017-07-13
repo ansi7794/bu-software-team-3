@@ -1,8 +1,10 @@
 $('#memreq-dropdown-options').on("click","li", function(event){
  	event.preventDefault();
  	var SearchString = String(document.URL);
+ 	console.log("req url:"+SearchString);
     var arr = SearchString.split('?');
-    var ids = arr[1].split('//');
+    var ids = arr[1].split('&&&');
+    console.log(arr);
     console.log(ids[1]);
     var user_name = $(this).attr('id');
 

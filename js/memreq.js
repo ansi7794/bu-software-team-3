@@ -1,7 +1,7 @@
 $(document).ready(function (){
    var SearchString = String(document.URL);
    var arr = SearchString.split('?');
-   var ids = arr[1].split('//');
+   var ids = arr[1].split('&&&');
    console.log(ids);
    var data = "txn=25"+"&requirement_id="+ ids[1];
    var memlist;
