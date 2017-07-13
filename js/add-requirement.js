@@ -3,7 +3,7 @@ $("#add-requirement2").click(function( event ) {
     var arr = SearchString.split('?');
     console.log(arr[1]);
     var idset = arr[1].split('&&&');
-    // var requirement_id = idset[1];
+    var requirement_id = idset[1];
     var project_id = idset[0];
     requirement_name = $('#add_requirement_name').val();
     requirement_status = $("#add_requirement_status").val();
