@@ -118,7 +118,6 @@
                     $("#edit_requirement_status").val(requirementdetailJSON.requirement_status);
                     $("#edit_requirement_name").val(requirementdetailJSON.requirement_title);
                     $("#edit_requirement_description").val(requirementdetailJSON.requirement_description);
-                    $("#edit_requirement_creator").val(requirementdetailJSON.project_creator);
                     $("#edit_requirement_id").val(requirement_id);
                 },
 
@@ -127,6 +126,31 @@
                     console.log(info);
                 }
             });
+        }
+    </script>
+    <script type="text/javascript">
+        function deleteUser(info){
+            var inp = info.split(",");
+            var loc = "requirements.html?"+ String(inp[0]);
+            var set = String(inp[0]).split("&&&");
+            console.log("url = " + loc);
+            console.log("set = " + set[0] + " ++ " + set[1]);
+            var delete_data = "txn=32" + "&requirement_id=" + set[1] +"&user_name=" + inp[1];
+            $.ajax({
+                type: "GET",
+                url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
+                data: delete_data,
+                success: function(info){
+                    console.log("delete user from requirement successfully!");
+                },
+                error: function (info) {
+                    console.log('An error occurred in deleting User from requirement!');
+                    console.log(info);
+                }
+            });
+
+            document.getElementById("delete_user").href = loc;
+            window.location.href=loc;
         }
     </script>
 </head>
@@ -238,9 +262,6 @@
                     <label class="control-label" style="width: 100%;">Requirements Title
                         <input type="text" class="form-control" name="requirement_name" id="edit_requirement_name">
                     </label>
-                    <label class="control-label" style="width: 100%;">Creator
-                        <input type="text" class="form-control" name="requirement_creator" id="edit_requirement_creator">
-                    </label>
                     <label class="control-label" style="width: 100%;">Description
                         <input type="text" class="form-control" name="requirement_description" id="edit_requirement_description">
                     </label>
@@ -275,9 +296,6 @@
                 <div class="modal-body">
                     <label class="control-label" style="width: 100%;">Requirements Title
                         <input type="text" class="form-control" name="add_requirement_name" id="add_requirement_name">
-                    </label>
-                    <label class="control-label" style="width: 100%;">Creator
-                        <input type="text" class="form-control" name="add_requirement_creator" id="add_requirement_creator">
                     </label>
                     <label class="control-label" style="width: 100%;">Description
                         <input type="text" class="form-control" name="add_requirement_description" id="add_requirement_description">

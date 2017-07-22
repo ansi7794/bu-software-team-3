@@ -12,6 +12,7 @@
     <title>CS675 term project</title>
 
     <link href="css/project.css" rel="stylesheet">
+    <link href="css/filtertable.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
     <link href="css/dialog.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
@@ -30,19 +31,10 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-
-    <!-- task list -->
-    <script type="text/javascript">
-
-    function openMMWindow() {
-            var SearchString = String(document.URL);
-            var arr = SearchString.split('?');
-            console.log("PROJECT ID: " + arr[1]);
-            var link = "https://ec2-54-209-178-159.compute-1.amazonaws.com/" + arr[1];
-            console.log("link: " + link);
-            console.log("inside open window");
-            window.open(link, “Mattermost”, “top=0,left=0,width=400,height=600,status=no,toolbar=no,location=no,menubar=no,titlebar=no”);
-        }
+    <script>
+    function problem(){
+        alert("plz work");
+    }
     </script>
     <script type="text/javascript">
         function editProject(){
@@ -169,6 +161,29 @@
             })
         });
     </script>
+    <script type="text/javascript">
+        function deleteUser(info){
+            var inp = info.split(",");
+            var loc = "project.html?"+ String(inp[0]);
+            console.log("url = " + loc);
+            var delete_data = "txn=31" + "&project_id=" + inp[0] +"&user_name=" + inp[1];
+            $.ajax({
+                type: "GET",
+                url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
+                data: delete_data,
+                success: function(info){
+                    console.log("delete user from Project successfully!");
+                },
+                error: function (info) {
+                    console.log('An error occurred in deleting User from project!');
+                    console.log(info);
+                }
+            });
+
+            document.getElementById("delete_user").href = loc;
+            window.location.href=loc;
+        }
+    </script>
 </head>
 
 <body>
@@ -235,15 +250,31 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                           <div class="dropdown">
-                                                <button class="btn btn-primary dropdown-toggle" id="members-dropdown" type="button" data-toggle="dropdown">Assign Members to Project
-                                                    <span class="caret"></span></button>
-                                                        <ul class="dropdown-menu" id="member-dropdown-options">
-                                                        </ul>
-                                            </div>
+                                            <table id="promembers">
+                                                  <tr class="header">
+                                                    <td>
+                                                        <th style="width:100%;">Current Members</th>
+                                                    </td>
+                                                  </tr>
+                                            </table>
                                         </td>
+                                    </tr>
+                                    <tr>
                                         <td>
-                                           <ul id="promembers"></ul>
+                                            <table id="add-members-list">
+                                                  <tr class="header">
+                                                    <td>
+                                                        <th style="width:100%;">Assign Members</th>
+                                                    </td>
+                                                  </tr>
+                                                    <tr>
+                                                    <td>  
+                                                        <select class="js-example-basic-single" id="select-member" onchange="problem();">
+                                                            <option value = "novalue">Select a member</option>
+                                                        </select>
+                                                    </td>
+                                                  </tr>
+                                            </table>
                                         </td>
                                     </tr>
                                     <tr>
@@ -316,8 +347,10 @@
     <!-- Add Modal content -->
     
 </div>
-<!-- jQuery -->
+
+
 <script src="js/jquery.js"></script>
+
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/add-members.js"></script>
@@ -325,6 +358,9 @@
 <script src="js/getAllUsers.js"></script>
 <script src="js/chatroom.js"></script>
 <script src="js/edit-project.js"></script>
+<link href="select2/dist/css/select2.min.css" rel="stylesheet" />
+<script src="select2/dist/js/select2.min.js"></script>
+
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/dashboard.js"></script>
@@ -357,6 +393,14 @@
                 console.log('An error occurred.');
                 console.log(info);
             }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+        $("#select-member").select2({
+            placeholder: "Select a Member"
         });
     });
 </script>

@@ -11,6 +11,8 @@
 
     <title>CS675 term project</title>
     <!-- Bootstrap Core CSS -->
+    <link href="css/project.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
@@ -184,16 +186,34 @@ function registerFunction(){
                     </div>
                     <!-- /.check password field -->
                 </div>
+                <div class="row">
+                    <label class="control-label">Recovery Question</label>
+                    <label class="col-xs-12 col-sm-6 col-md-6">
+                        <select id="user_recovery_question">
+                            <option value="What is you mother's maiden name?">What is you mother's maiden name?</option>
+                            <option value="Which city were you born in?">Which city were you born in?</option>
+                            <option value="Which was the first school you attended?">Which was the first school you attended?</option>
+                            <option value="What is your first pet's name?">What is your first pet's name?</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="user_recovery_word" id="user_recovery_word" class="form-control input-lg" placeholder="Enter your answer" tabindex="6">
+                        </div>
+                    </div>
+                </div>
                 <!-- /.password field -->
                 <hr class="colorgraph">
                 <div class="row">
                     <!-- login button -->
-                        <div class="col-xs-12 col-md-6"><input type="submit" id ='register' value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7">
+                        <div class="col-xs-12 col-sm-12 col-md-12"><input type="submit" id ='register' value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7">
                     <!-- /.login button-->
-                    </div>
-                        <div class="col-xs-12 col-md-6"><input type="button" value="Login" class="btn btn-success btn-block btn-lg" tabindex="8" onclick = "window.open('login.html','_self')" >
-                            
-                    </div>
+                    <!--</div>-->
+                        <!--<div class="col-xs-12 col-md-6"><input type="button" value="Login" class="btn btn-success btn-block btn-lg" tabindex="8" onclick = "window.open('login.html','_self')" >-->
+                            <!---->
+                    <!--</div>-->
                 </div>
             </div>
         </form>
@@ -203,16 +223,16 @@ function registerFunction(){
     <hr>
 
     <!-- Call to Action Section -->
-    <div class="well">
-        <div class="row">
-            <div class="col-md-8">
-                <p>Here is the directly access to online chat</p>
-            </div>
-            <div class="col-md-4">
-                <a class="btn btn-lg btn-default btn-block" href="#">Go Chat</a>
-            </div>
-        </div>
-    </div>
+    <!--<div class="well">-->
+        <!--<div class="row">-->
+            <!--<div class="col-md-8">-->
+                <!--<p>Here is the directly access to online chat</p>-->
+            <!--</div>-->
+            <!--<div class="col-md-4">-->
+                <!--<a class="btn btn-lg btn-default btn-block" href="#">Go Chat</a>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 
     <hr>
 

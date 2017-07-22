@@ -10,14 +10,24 @@
     <meta name="author" content="">
 
     <title>CS675 term project</title>
+    <!-- Custom CSS -->
+    <link href="css/modern-business.css" rel="stylesheet">
+    <style>
+        @import url('css/dialog.css');
+        @import "css/dashboard.css";
+        @import "css/sidebar.css";
+    </style>
+    <link href="css/sidebar.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="css/project.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -102,31 +112,56 @@ function loginFunction(){
                         <input type="button" value="Register" class="btn btn-success btn-block btn-lg" tabindex="7" onclick = "window.open('register.html','_self')" >
                     </div>
                 </div>
+                <div class="col-lg-12 col-md-5">
+                    <div class="header-rightside">
+                        <ul class="list-inline header-top pull-right">
+                            <li class="hidden-xs"><a href="#" data-toggle="modal" data-target="#recovery">Forgot Password</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
-    <!-- /.row -->
-
-    <hr>
-
-
-
-    <!-- Footer -->
-    <footer>
-        <div class="row">
-            <div class="col-lg-3"></div>
-            <div class="col-lg-9">
-                <p>Copyright &copy; Your Website 2014</p>
+</div>
+<div id="recovery" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header login-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Password Recovery</h4>
+            </div>
+            <div class="modal-body">
+                <label class="control-label" style="width: 100%;">
+                    <input type="text" class="form-control input-md" id = "rec_user_name" placeholder="Username" name="rec_user_name">
+                </label>
+                <label class="control-label" style="width: 100%;">
+                    <select id="user_recovery_question">
+                        <option value="What is you mother's maiden name?">What is you mother's maiden name?</option>
+                        <option value="Which city were you born in?">Which city were you born in?</option>
+                        <option value="Which was the first school you attended?">Which was the first school you attended?</option>
+                        <option value="What is your first pet's name?">What is your first pet's name?</option>
+                    </select>
+                </label>
+                <label class="control-label" style="width: 100%;">
+                    <input type="text" class="form-control input-md" id = "user_recovery_word" placeholder="Security Answer" name="user_recovery_word">
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="cancel btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="recover_pass" class="add-project btn btn-primary" data-dismiss="modal">Try Recovery</button>
             </div>
         </div>
-    </footer>
 
+    </div>
 </div>
+<hr>
 <!-- /.container -->
 
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 <script src="js/login.js"></script>
+<script src="js/recover.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 

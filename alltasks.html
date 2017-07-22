@@ -109,13 +109,12 @@
                     $("#edit_task_status").val(taskdetailJSON.task_status);
                     $("#edit_task_name").val(taskdetailJSON.task_name);
                     $("#edit_task_description").val(taskdetailJSON.task_description);
-                    $("#edit_task_creator").val(taskdetailJSON.task_creator);
                     $("#edit_task_due").val(taskdetailJSON.task_due_date);
                     $("#edit_task_id").val(task_id);
                 },
 
                 error: function (info) {
-                    console.log('An error occurred in TASK detail table!');
+                    console.log('An error occurred in TASK update!');
                     console.log(info);
                 }
             });
@@ -142,6 +141,31 @@
             });
 
             document.getElementById("delete_task").href = loc;
+            window.location.href=loc;
+        }
+    </script>
+    <script type="text/javascript">
+        function deleteUser(info){
+            var inp = info.split(",");
+            var loc = "alltasks.html?"+ String(inp[0]);
+            var set = String(inp[0]).split("&&&");
+            console.log("url = " + loc);
+            console.log("set = " + set[0] + " ++ " + set[1]);
+            var delete_data = "txn=33" + "&task_id=" + set[1] +"&user_name=" + inp[1];
+            $.ajax({
+                type: "GET",
+                url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
+                data: delete_data,
+                success: function(info){
+                    console.log("delete user from TASK successfully!");
+                },
+                error: function (info) {
+                    console.log('An error occurred in deleting User from TASK!');
+                    console.log(info);
+                }
+            });
+
+            document.getElementById("delete_user").href = loc;
             window.location.href=loc;
         }
     </script>
@@ -228,12 +252,6 @@
                     </tr>
                     <tr>
                         <td>
-                            <b>Creator</b>
-                        </td>
-                        <td id="task_creator"></td>
-                    </tr>
-                    <tr>
-                        <td>
                             <b>Due Date</b>
                         </td>
                         <td id="task_due"></td>
@@ -268,10 +286,7 @@
                 <div class="modal-body">
                     <input type="hidden" class="form-control" name="edit_task_id" id="edit_task_id" readonly>
                     <label class="control-label" style="width: 100%;">Task Title
-                        <input type="text" class="form-control" name="edit_task_name" id="edit_task_name" readonly>
-                    </label>
-                    <label class="control-label" style="width: 100%;">Creator
-                        <input type="text" class="form-control" name="edit_task_creator" id="edit_task_creator" readonly>
+                        <input type="text" class="form-control" name="edit_task_name" id="edit_task_name">
                     </label>
                     <label class="control-label" style="width: 100%;">Description
                         <input type="text" class="form-control" name="edit_task_description" id="edit_task_description">
@@ -313,9 +328,6 @@
                 <div class="modal-body">
                     <label class="control-label" style="width: 100%;">Task Title
                         <input type="text" class="form-control" name="add_task_name" id="add_task_name">
-                    </label>
-                    <label class="control-label" style="width: 100%;">Creator
-                        <input type="text" class="form-control" name="add_task_creator" id="add_task_creator">
                     </label>
                     <label class="control-label" style="width: 100%;">Description
                         <input type="text" class="form-control" name="add_task_description" id="add_task_description" >
@@ -444,7 +456,6 @@ $(document).ready(function GetUrlValue(VarSearch){
             $("#task_status").append(taskdetailJSON.task_status);
             $("#task_name").append(taskdetailJSON.task_name);
             $("#task_description").append(taskdetailJSON.task_description);
-            $("#task_creator").append(taskdetailJSON.task_creator);
             $("#task_due").append(taskdetailJSON.task_due_date);
         },
 
