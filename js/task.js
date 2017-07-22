@@ -7,13 +7,12 @@ $("#add-task").click(function (event) {
    task_name = $('#add_task_name').val();
    task_status = $('#add_task_status').val();
    task_description = $('#add_task_description').val();
-   user_name = $('#add_task_creator').val();
    task_due = $('#add_task_due').val();
 
    var data = "txn=13" +
            "&task_name=" + task_name +
            "&task_status=" + task_status +
-           "&task_description=" + task_description + "&user_name=" + user_name +
+           "&task_description=" + task_description +
            "&requirement_id=" + requirement_id + "&task_due_date=" + task_due;
    console.log(data);
    $.ajax({

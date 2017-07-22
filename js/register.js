@@ -1,7 +1,7 @@
 // Attach a submit handler to the form
 $("#register_form").submit(function( event ) {
     if ($('#user_password1').val() == $('#user_password2').val()) { 
-        var data = "txn=2"+"&user_name="+ $('#user_name').val() +"&user_password=" + $('#user_password1').val()+"&user_email=" + $('#user_email').val()+"&user_fname=" + $('#user_fname').val()+"&user_lname=" + $('#user_lname').val();
+        var data = "txn=2"+"&user_name="+ $('#user_name').val() +"&user_password=" + $('#user_password1').val()+"&user_email=" + $('#user_email').val()+"&user_fname=" + $('#user_fname').val()+"&user_lname=" + $('#user_lname').val()+"&user_recovery_question=" + $('#user_recovery_question').val()+"&user_recovery_word=" + $('#user_recovery_word').val();
         var user = $('#user_name').val();
         // Stop form from submitting normally
         event.preventDefault();
@@ -24,7 +24,11 @@ $("#register_form").submit(function( event ) {
                 console.log("Hey, we got reply form java side, with following data: ");
                 console.log(info);
                 myJSON = JSON.parse(info);
+                delete myJSON['user_password'];
+                delete myJSON['user_recovery_word'];
+                delete myJSON['user_recovery_question'];
                 strJSON = JSON.stringify(myJSON);
+                console.log(myJSON);
                 console.log("testing success");
                 // redirecting example..
                 if(myJSON.user_name == user) {
@@ -36,8 +40,10 @@ $("#register_form").submit(function( event ) {
             },
 
             error: function (info) {
+                myJSON = JSON.parse(info);
                 console.log('An error occurred.');
-                console.log(info);
+                console.log(myJSON.reason);
+                alert(myJSON.reason);
             },
         });
     }

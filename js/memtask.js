@@ -19,7 +19,7 @@ $(document).ready(function (){
           for (var i = 0; i < listlen; i++) {
               console.log(i);
               memJSON = JSON.parse(memlist[i]);
-              var memberinfo = "<li>"+ memJSON.user_name+"</li>";
+              var memberinfo = "<li>"+ memJSON.user_name+"<a href='javascript:deleteUser(\"" + arr[1] + "," + memJSON.user_name + "\");' id='delete_user'><em class='fa fa-trash'></em></a></li>";
               $(memberinfo).appendTo("#promemtask");
           }
         },

@@ -8,12 +8,10 @@ $("#add-requirement2").click(function( event ) {
     requirement_name = $('#add_requirement_name').val();
     requirement_status = $("#add_requirement_status").val();
     requirement_description = $('#add_requirement_description').val();
-    user_name = $('#add_requirement_creator').val();
     var data = "txn=11"
         + "&requirement_name=" + requirement_name
         + "&requirement_status=" + requirement_status
         + "&requirement_description=" + requirement_description
-        + "&user_name=" + user_name
         + "&project_id=" + project_id;
     console.log(data);
     $.ajax({
