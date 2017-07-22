@@ -35,7 +35,20 @@
             document.getElementById('prodetail').src = loc;
         }
     </script>
-
+    <script>
+        function IssueGetProj(){
+            var SearchString = String(document.URL);
+            var arr = SearchString.split('?');
+            console.log(arr[1]);
+            var res = String(arr[1]).replace(/%22/g, "\"");
+            console.log(res);
+            //Set session variables
+            var userJSON = JSON.parse(res);
+            var loc = "allissues.html?" + String(userJSON.user_name);
+            console.log(loc);
+            document.getElementById('issues').href = loc;
+        }
+    </script>
     <script>
         $(document).ready(function(){
             $("issues").click(function(e) {
@@ -116,7 +129,7 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#issuedata"><i class="fa fa-fw fa-bug"></i> Issue Tracker <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="issuedata" class="collapse">
                             <li>
-                                <a href="allissues.html" target="prodetail" id="issues"><i class="fa fa-arrow-right"></i>&nbsp;Issues</a>
+                                <a href="javascript:IssueGetProj()" target="prodetail" id="issues"><i class="fa fa-arrow-right"></i>&nbsp;Issues</a>
                             </li>
                             <li>
                                 <a href="issue_tracker.html" target="prodetail" id="tracker"><i class="fa fa-list"></i>&nbsp;Tracking List</a>
