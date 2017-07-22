@@ -172,15 +172,13 @@
                 data: delete_data,
                 success: function(info){
                     console.log("delete user from Project successfully!");
+                    window.location.reload();
                 },
                 error: function (info) {
                     console.log('An error occurred in deleting User from project!');
                     console.log(info);
                 }
             });
-
-            document.getElementById("delete_user").href = loc;
-            window.location.href=loc;
         }
     </script>
 </head>
