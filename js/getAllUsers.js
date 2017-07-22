@@ -1,5 +1,5 @@
- $('#members-dropdown').on({
-	"click":function(e){
+$( document ).ready(function() {
+		console.log("inside select-member");
 	    var data = "txn=24";
 		$.ajax({
 		    type: "GET",
@@ -12,12 +12,13 @@
 	                listlen = memberlist.length;
 	                console.log(listlen);
 	                console.log(memberlist);
-	                $("#member-dropdown-options").empty();
+	                $("#select-member").empty();
+	                var Selectline ="<option value = \"novalue\">Select a member</option>";
+	                $("#select-member").append(Selectline);
 	                for (var i = 0; i < listlen; i++) {
 	                    memJSON = JSON.parse(memberlist[i]);
-	                    var meminfo = "<li id=\""+ memJSON.user_name +"\"><a href='#'>"+ memJSON.user_name +"</a></li>"
-	                    $("#member-dropdown-options").append(meminfo);
-
+	                    var meminfo = "<option value="+ memJSON.user_name + ">" +  memJSON.user_name + "</option>";//"<li id=\""+ memJSON.user_name +"\"><a href='#'>"+ memJSON.user_name +"</a></li>" //"<option value="+ memJSON.user_name + ">" +  memJSON.user_name + "</option>"//
+	                    $("#select-member").append(meminfo);
 	                }
 		            //window.location.href=window.location.href;
 		        },
@@ -27,6 +28,4 @@
 		        console.log(info);
 		    },
 		});
-
-	}
 });
