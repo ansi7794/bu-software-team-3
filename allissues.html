@@ -32,8 +32,9 @@
     <script>
         function GetIssuesByProj(proj_id){
             list_data = "txn=34" + "&project_id=" + proj_id;
-            $("#issue_proj_id").val(proj_id);
+            $("#add_issue_projid").val(proj_id);
             console.log("issue list = " + list_data);
+            loc = "allissues.html?" + proj_id;
             $.ajax({
                 type: "GET",
                 url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
@@ -107,6 +108,7 @@
     <script>
         function deleteIssue(issue_id){
             console.log("issue id = " + issue_id);
+            var project_id =  $("#add_issue_projid").val();
             var delete_data = "txn=23" + "&issue_id=" + issue_id;
             $.ajax({
                 type: "GET",
@@ -114,6 +116,8 @@
                 data: delete_data,
                 success: function(info){
                     console.log("delete ISSUE successfully!");
+                    console.log("function call");
+                    GetIssuesByProj(project_id);
                 },
                 error: function (info) {
                     console.log('An error occurred in deleting ISSUE!');
@@ -134,11 +138,9 @@
             <h2>
                 Issues Table
             </h2>
-            <label class="form-control">
-                <select id="issue_project_list" onchange="GetIssuesByProj(this.value)">
-                    <option value="default">Choose a project</option>
-                </select>
-            </label>
+            <select id="issue_project_list" onchange="GetIssuesByProj(this.value)">
+                <option value="default">Choose a project</option>
+            </select>
         </div>
         <div class="col-lg-12">
             <header>
@@ -179,112 +181,6 @@
                     </thead>
                     <tbody id="issues_data">
                     </tbody>
-                    <!--<tr>-->
-                        <!--<td class="iopen"><a href="#">OPEN</a></td>-->
-                        <!--<td>-->
-                            <!--<a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Need help with...</a>-->
-                        <!--</td>-->
-                        <!--<td>Bella</td>-->
-                        <!--<td>someone</td>-->
-                        <!--<td class="ilow">Low</td>-->
-                        <!--<td>2017-05-25</td>-->
-                        <!--<td>2017-06-01</td>-->
-                        <!--<td align="center">-->
-                            <!--<a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_issue"><em class="fa fa-pencil"></em></a>-->
-                            <!--<a class="btn btn-danger"><em class="fa fa-trash"></em></a>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td class="iopen"><a href="#">OPEN</a></td>-->
-                        <!--<td>-->
-                            <!--<a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Do not find sumbit...</a>-->
-                        <!--</td>-->
-                        <!--<td>Tylor</td>-->
-                        <!--<td>someone</td>-->
-                        <!--<td class="inormal">Normal</td>-->
-                        <!--<td>2017-05-25</td>-->
-                        <!--<td>2017-06-01</td>-->
-                        <!--<td align="center">-->
-                            <!--<a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_issue"><em class="fa fa-pencil"></em></a>-->
-                            <!--<a class="btn btn-danger"><em class="fa fa-trash"></em></a>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td class="iawaiting"><a href="#">AWAITING</a></td>-->
-                        <!--<td>-->
-                            <!--<a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Why some tags does not....</a>-->
-                        <!--</td>-->
-                        <!--<td>Caroline</td>-->
-                        <!--<td>someone</td>-->
-                        <!--<td class="ihigh">High</td>-->
-                        <!--<td>2017-05-25</td>-->
-                        <!--<td>2017-06-01</td>-->
-                        <!--<td align="center">-->
-                            <!--<a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_issue"><em class="fa fa-pencil"></em></a>-->
-                            <!--<a class="btn btn-danger"><em class="fa fa-trash"></em></a>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td class="iprocessing"><a href="#">PROCESSING</a></td>-->
-                        <!--<td>-->
-                            <!--<a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">POST does not work...</a>-->
-                        <!--</td>-->
-                        <!--<td>Matt</td>-->
-                        <!--<td>someone</td>-->
-                        <!--<td class="ihigh">High</td>-->
-                        <!--<td>2017-05-25</td>-->
-                        <!--<td>2017-06-01</td>-->
-                        <!--<td align="center">-->
-                            <!--<a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_issue"><em class="fa fa-pencil"></em></a>-->
-                            <!--<a class="btn btn-danger"><em class="fa fa-trash"></em></a>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td class="iclosed"><a href="#">CLOSED</a></td>-->
-                        <!--<td>-->
-                            <!--<a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">Jumping between pages has error...</a>-->
-                        <!--</td>-->
-                        <!--<td>Anushree</td>-->
-                        <!--<td>someone</td>-->
-                        <!--<td class="imedium">Medium</td>-->
-                        <!--<td>2017-05-25</td>-->
-                        <!--<td>2017-06-01</td>-->
-                        <!--<td align="center">-->
-                            <!--<a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_issue"><em class="fa fa-pencil"></em></a>-->
-                            <!--<a class="btn btn-danger"><em class="fa fa-trash"></em></a>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td class="iopen"><a href="#">OPEN</a></td>-->
-                        <!--<td>-->
-                            <!--<a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">DB relation between tables problem....</a>-->
-                        <!--</td>-->
-                        <!--<td>Jim</td>-->
-                        <!--<td>someone</td>-->
-                        <!--<td class="imedium">Medium</td>-->
-                        <!--<td>2017-02-12</td>-->
-                        <!--<td>2017-06-01</td>-->
-                        <!--<td align="center">-->
-                            <!--<a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_issue"><em class="fa fa-pencil"></em></a>-->
-                            <!--<a class="btn btn-danger"><em class="fa fa-trash"></em></a>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td class="iawaiting"><a href="#">AWAITING</a></td>-->
-                        <!--<td>-->
-                            <!--<a href="#" class="view-issue" data-toggle="modal" data-target="#view_issue">More...</a>-->
-                        <!--</td>-->
-                        <!--<td>someone</td>-->
-                        <!--<td>someone</td>-->
-                        <!--<td class="ilow">Low</td>-->
-                        <!--<td>2017-04-12</td>-->
-                        <!--<td>2017-05-01</td>-->
-                        <!--<td align="center">-->
-                            <!--<a class="btn btn-default edit-issue" data-toggle="modal" data-target="#edit_issue"><em class="fa fa-pencil"></em></a>-->
-                            <!--<a class="btn btn-danger"><em class="fa fa-trash"></em></a>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--</thead>-->
                 </table>
             </div>
         </div>
@@ -302,7 +198,7 @@
                     <input type="hidden" class="form-control" name="edit_issue_projid" id="edit_issue_projid" readonly>
                     <input type="hidden" class="form-control" name="edit_issue_id" id="edit_issue_id" readonly>
                     <label class="control-label">Issue Title
-                        <input type="text" class="form-control" name="add_issue_name" id="edit_issue_name">
+                        <input type="text" class="form-control" name="edit_issue_name" id="edit_issue_name">
                     </label><br>
                     <label class="control-label">Severity</label>
                     <label>
@@ -438,7 +334,6 @@
                     console.log(i);
                     proJSON = JSON.parse(projectlist[i]);
                     var proinfo = "<option value='" + proJSON.project_id + "'><span class='hidden-xs hidden-sm'>" + proJSON.project_name + "</span>" + "</option>";
-//                    var proinfo = "<option value='" + proJSON.project_id + "' onclick='GetIssuesByProj('" + proJSON.project_id + "')'>" + "<span class='hidden-xs hidden-sm'>" + proJSON.project_name + "</span>" + "</option>";
                     $(proinfo).appendTo("#issue_project_list");
                     console.log(proinfo);
                 }
