@@ -161,8 +161,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
+            <h3 id="project_name">
+            </h3>
             <h2>
-                Requirements Table <a href="requirements_timeline.html" target="prodetail" id="requirementstimeline"><small>View Time Line</small></a>
+                Requirements Table
             </h2>
         </div>
         <div class="col-lg-12">
@@ -210,7 +212,7 @@
     <hr><br><br>
     <!-- detail table -->
     <div class="col-lg-12">
-        <div class="table-responsive">
+        <div id="req_det_tab" class="table-responsive">
             <h3 id="the_requirement_name"></h3>
             <table class="table table-striped table-hover">
                 <tbody>
@@ -334,6 +336,7 @@
 <script type="text/javascript">
      $(document).ready(function GetUrlValue(VarSearch){
         var SearchString = String(document.URL);
+        $('req_det_tab').hide();
         var arr  = SearchString.split('?');
         var idset = arr[1].split("&&&");
         var project_id = 0;
@@ -379,7 +382,7 @@
 
                         var htmlTaskButton = "<td><a href=\"javascript:MyFunction(\'" +
                             parsedJSON.requirement_id +
-                            "\');\" target=\"prodetail\" id=\"requirement2\">Task<em class=\"fa fa-fighter-jet\"></em></a></td></tr>";
+                            "\');\" target=\"prodetail\" id=\"requirement2\">Go to Tasks<em class=\"fa fa-fighter-jet\"></em></a></td></tr>";
 
 
                         var requirements_info = htmlStatus + htmlTitle + htmlDescription + htmlEditButton + htmlTrashButton + htmlTaskButton;
@@ -409,6 +412,23 @@
                  $("#the_requirement_description").append(requirementdetailJSON.requirement_description);
              }
          });
+
+        var proj_data = "txn=4" + "&project_id=" + arr[1];
+        $.ajax({
+            type: "GET",
+            url: "http://ec2-34-201-82-113.compute-1.amazonaws.com/idea/IDEA.jsp?",
+            data: proj_data,
+            success: function(info){
+                var project_detail = info.replace(/\n/gm,"");
+                var projectdetailJSON = JSON.parse(project_detail);
+                det = "<a href=\"project.html?"+projectdetailJSON.project_id+"\">"+projectdetailJSON.project_name+"</a>";
+                $("#project_name").append(det);
+            },
+            error: function (info) {
+                console.log('An error occurred in ajax!');
+                console.log(info);
+            }
+        });
     });    
 </script>
 

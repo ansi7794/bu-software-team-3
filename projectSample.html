@@ -42,6 +42,7 @@
             console.log(arr[1]);
             var res = String(arr[1]).replace(/%22/g, "\"");
             console.log(res);
+            var x = document.getElementById('');
             //Set session variables
             var userJSON = JSON.parse(res);
             var loc = "allissues.html?" + String(userJSON.user_name);
@@ -85,24 +86,12 @@
 <div class="wrapper">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="home.html">Project Management Tool</a>
+                <a class="navbar-brand" href="#">Idea Project Management Tool <i class="fa fa-dashboard"></i>CS673 team3</a>
             </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
                 <ul class="nav navbar-right top-nav">
                     <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
+                        <a href="login.html">Logout</a>
                     </li>
                 </ul>
         <!-- /.navbar-horizon -->
@@ -110,7 +99,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="home.html">
+                        <a href="index.html">
                         <!-- <div class="thumbnail" align="center">-->
                             <div class="icon">
                                 <!--<i class="fa fa-file-text-o" style="font-size: 72px; margin-top: 7px;"> <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" /></i>-->
@@ -126,15 +115,16 @@
                         <ul id="prodata" class="collapse"></ul>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#issuedata"><i class="fa fa-fw fa-bug"></i> Issue Tracker <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="issuedata" class="collapse">
+                        <!--a href="javascript:;" data-toggle="collapse" data-target="#issuedata"><i class="fa fa-fw fa-bug"></i> Issue Tracker <i class="fa fa-fw fa-caret-down"></i></a-->
+                        <a href="javascript:IssueGetProj()" target="prodetail" id="issues"><i class="fa fa-fw fa-bug"></i> Issue Tracker <i class="fa fa-arrow-right"></i></a>
+                        <!--ul id="issuedata" class="collapse">
                             <li>
                                 <a href="javascript:IssueGetProj()" target="prodetail" id="issues"><i class="fa fa-arrow-right"></i>&nbsp;Issues</a>
                             </li>
                             <li>
                                 <a href="issue_tracker.html" target="prodetail" id="tracker"><i class="fa fa-list"></i>&nbsp;Tracking List</a>
                             </li>
-                        </ul>
+                        </ul-->
                     </li>
 
                     <li>
@@ -149,34 +139,17 @@
     <div class="container-fluid" style="margin-right: auto; margin-left: 250px;">
         <!-- Page Heading -->
         <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">
-                    IDEA Project Management Tool <small>Overview</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li class="active">
-                        <i class="fa fa-dashboard"></i> CS673 team3
-                    </li>
-                </ol>
-            </div>
-            <header>
-                <div class="col-lg-12 col-md-5">
+            <header id="add-project-button">
+                <div class="col-lg-12 col-md-5 col-sm-5 col-xs-5">
                     <div class="header-rightside">
                         <ul class="list-inline header-top pull-right">
-                            <li class="hidden-xs"><a href="#" class="add-project" data-toggle="modal" data-target="#add_project">Add Project</a></li>
-                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-                            <li>
-                                <a href="#" class="icon-info">
-                                    <i class="fa fa-bell" aria-hidden="true"></i>
-                                    <span class="label label-primary">3</span>
-                                </a>
-                            </li>
+                            <li><button href="#" class="add-project btn btn-primary" data-toggle="modal" data-target="#add_project">Add New Project</button></li>
                         </ul>
                     </div>
                 </div>
             </header>
             <!-- iframes -->
-            <div class="col-lg-12">
+            <div class="col-lg-12 col-md-5 col-sm-5 col-xs-5">
                 <iframe id="prodetail" name="prodetail" src="" style="width: 100%; height: 900px; border: 0; margin-top: auto; "></iframe>
             </div>
             
@@ -262,9 +235,9 @@
                     proJSON = JSON.parse(projectlist[i]);
                     var proinfo = "<li><a href=\"javascript:MyFunction(\'"
                         + proJSON.project_id
-                        + "\');\"><i class='fa fa-cube' aria-hidden='true' data-toggle='collapse' data-tRarget='projsubs'></i><span class='hidden-xs hidden-sm'>&nbsp;"
+                        + "\');\"><i class='fa fa-cube' aria-hidden='true' data-toggle='collapse' data-tRarget='projsubs'></i>&nbsp;"
                         + proJSON.project_name
-                        +"</span></a></li>";
+                        +"</a></li>";
                     $(proinfo).appendTo("#prodata");
 //                    $("head").appendTo("<link href='css/dialog.css' rel='tylesheet'>" +
 //                        "<link href='css/modern-business.css' rel='stylesheet'>" +

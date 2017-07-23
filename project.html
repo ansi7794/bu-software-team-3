@@ -195,21 +195,19 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-files-o fa-5x"></i>
+                                    <i class="fa fa-files-o fa-3x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">8</div>
-                                    <div>New Requirements!</div>
+                                    <a href="requirements.html" target="prodetail" id="requirements">
+                                        <div class="panel-footer">
+                                            <b><span class="pull-left">View Requirements</span></b>
+                                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <a href="requirements.html" target="prodetail" id="requirements">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Requirements</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
                         <h1 id="project_name"></h1>
                         <div class='text-right'>
                             <button onclick= "editProject();" class='btn btn-default' data-toggle='modal' data-target='#edit_project'><em class='fa fa-pencil'></em></a>
@@ -249,16 +247,16 @@
                                         <th>
                                             Assign Members
                                         </th>
-                                        <th>
-                                            Current Members
-                                        </th>
-                                    </tr>
-                                    <tr>
                                         <td>  
-                                            <select class="js-example-basic-single" id="select-member" onchange="problem();">
+                                            <select class="js-example-basic-single" id="select-member">
                                                 <option value = "novalue">Select a member</option>
                                             </select>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            Current Members
+                                        </th>
                                         <td id="promembers">
                                         </td>
                                     </tr>
