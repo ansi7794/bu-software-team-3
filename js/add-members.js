@@ -35,20 +35,3 @@ select2.on("select2:select", function (event) {
         },
     });
 });
-
-/*select2.onSelect = (function(fn) {
-    console.log("onSelect");
-    return function(data, options) {
-        var target;
-        console.log("something");
-        if (options != null) {
-            target = $(options.target);
-        }
-        
-        if (target && target.hasClass('info')) {
-            alert('click!');
-        } else {
-            return fn.apply(this, arguments);
-        }
-    }
-})(select2.onSelect);*/
