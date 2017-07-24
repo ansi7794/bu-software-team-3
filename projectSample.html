@@ -153,7 +153,14 @@
                         <input type="text" class="form-control input-md" id = "project_creator" placeholder="Project Creator" name="project_creator" readonly>
                     </label>
                     <label class="control-label" style="width: 100%;">
-                        <input type="text" class="form-control input-md" id = "project_status" placeholder="Project Status" name="project_status">
+                        <label class="control-label">Status</label>
+                        <select id = "project_status" placeholder="Project Status" name="project_status">
+                            <option value="NEW">NEW</option>
+                            <option value="IN PROCESS">IN PROCESS</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                            <option value="CANCELLED">CANCELLED</option>
+                            <option value="ON HOLD">ON HOLD</option>
+                        </select>
                     </label>
                     <label class="control-label" style="width: 100%;">
                         <input type="text" class="form-control input-md" id = "project_description" placeholder="Project Description" name="project_description" style="height: 200px;">
