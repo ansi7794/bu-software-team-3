@@ -333,7 +333,7 @@ header {
     right: 12px;
     top: 11px;
 }
-.title  .btn-group {
+.title{
     float: right;
 }
 .title h2 {
@@ -357,7 +357,7 @@ header {
     width: 100%;
     color: #0e1a35;
 }
-.title .btn-group.open .dropdown-toggle, .btn.active, .btn:active{
+.title .open .dropdown-toggle, .btn.active, .btn:active{
     box-shadow: none;
 }
 .title .dropdown-menu > a {
