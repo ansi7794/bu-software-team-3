@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -446,7 +445,7 @@ $(document).ready(function GetUrlValue(VarSearch){
         success: function(info){
             var req_detail = info.replace(/\n/gm,"");
             var reqdetailJSON = JSON.parse(req_detail);
-            req = "<a href=\"requirements.html?"+reqdetailJSON.requirement_id+"\">"+reqdetailJSON.requirement_title+"</a><small>   Task Table</small>";
+            req = "<a href=\"requirements.html?"+reqdetailJSON.project_id+"\">"+reqdetailJSON.requirement_title+"</a><small>   Task Table</small>";
             $("#requirement_name").append(req);
         },
         error: function (info) {
